@@ -1,6 +1,6 @@
 {
-  "name": "sm-ui",
-  "version": "0.0.4",
+  "name": "sm-design",
+  "version": "0.0.5",
   "description": "A Design UI library for React",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -29,9 +29,9 @@
     "sm-ui"
   ],
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "build:commonjs": "cross-env BABEL_OUTPUT=commonjs babel src/components --out-dir lib/ --ignore **/__tests__,**/__mocks__",
     "build:esm": "babel src/components --out-dir esm/ --ignore **/__tests__,**/__mocks__",
     "copy-css:esm": "cpx \"src/components/**/*.css\" esm",
