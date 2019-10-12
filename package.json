@@ -6,6 +6,7 @@
   "module": "esm/index.js",
   "author": "lvjing",
   "license": "MIT",
+  "private": true,
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
