@@ -10,20 +10,21 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "sm-ui": "^1.2.4"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/text-sm-ui/sm-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/text-sm-ui/sm-ui.git"
+    "url": "https://github.com/text-sm-ui/sm-ui/issues"
   },
   "files": [
     "esm",
     "lib"
   ],
-  "homepage": "ttps://github.com/text-sm-ui/sm-ui.git",
+  "homepage": "https://github.com/text-sm-ui/sm-ui#readme",
   "keywords": [
     "sm-ui"
   ],
