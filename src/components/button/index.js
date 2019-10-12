@@ -6,25 +6,14 @@
  * @LastEditTime: 2019-10-12 20:44:26
  */
 
-import React, { Component } from 'react';
-
+import React from 'react';
 import PropTypes from 'prop-types';
-
 import './index.css';
 
-class Buttons extends Component {
-    static defaultProps = {
-        text: '按钮'
-    }
-    static propTypes = {
-        text: PropTypes.string 
-    }
-    
-    render() {
-        return (
-            <button className='btn'>{ this.props.children }</button>
-        )
-    }
-}
+const Button = ({ text }) => <button className="btn">这是一个组件按钮{text}</button>
 
-export default Buttons
+Button.propTypes = {
+  text: PropTypes.any
+};
+
+export default Button;
