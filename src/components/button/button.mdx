@@ -3,7 +3,7 @@ name: Button
 route: /button
 ---
 
-import { Playground, Props } from 'docz'
+import { Playground, Props  } from 'docz'
 import Button from './index.js'
 
 # Button
@@ -13,5 +13,9 @@ import Button from './index.js'
 ## Basic usage
 
 <Playground>
-    <Button>Click me</Button>
+    <Button style={{ marginRight: '15px' }}>default</Button>
+    <Button type='primary' style={{ marginRight: '15px' }}>primary</Button>
+    <Button type='danger' style={{ marginRight: '15px' }}>danger</Button>
+    <Button type='warning' style={{ marginRight: '15px' }}>warning</Button>
+    <Button type='danger' disabled>danger</Button>
 </Playground>

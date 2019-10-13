@@ -14,14 +14,19 @@ import './index.less';
 class Button extends Component {
     static defaultProps = {
         type: 'default',
+        disabled: false
     }
     static propTypes = {
-        type: PropTypes.string,
+        type: PropTypes.oneOf(['default', 'primary', 'danger', 'warning']),
+        disabled: PropTypes.oneOf([true, false])
     }
     render() {
         return (
-            <button className={['sm-button', `sm-btn-${this.props.type}`].join(' ')}>
-                { this.props.children }
+            <button className={['sm-button', `sm-btn-${this.props.type}`].join(' ')}
+                onClick={this.props.onClick}
+                disabled={this.props.disabled}
+                style={this.props.style}>
+                <span>{ this.props.children }</span>
             </button>
         )
     }

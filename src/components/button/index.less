@@ -20,8 +20,8 @@
 }
 
 .sm-btn-danger{
-    background-color: #ed4014;
-    border-color: #ed4014;
+    background-color: @danger;
+    border-color: @danger;
     color: white;
 }
 .sm-btn-danger:hover{
@@ -31,5 +31,42 @@
 }
 .sm-btn-danger:focus{
     color: white;
-    box-shadow: 0 0 0 2px rgba(237,64,20,.2)
+    box-shadow: @dangerShadow;
+}
+
+.sm-btn-primary{
+    background-color: @primary;
+    border-color: @primary;
+    color: white;
+}
+.sm-btn-primary:hover{
+    background-color: #57a3f3;
+    border-color: #57a3f3;
+    color: white;
+}
+.sm-btn-primary:focus{
+    box-shadow: @primaryShadow;
+    color: white;
+}
+
+.sm-button:disabled {
+    color: #c5c8ce;
+    background-color: #f7f7f7;
+    border-color: #dcdee2;
+    cursor: not-allowed;
+}
+
+.sm-btn-warning{
+    background-color: @warning;
+    border-color: @warning;
+    color: white;
+}
+.sm-btn-warning:hover{
+    background-color: #ffad33;
+    border-color: #ffad33;
+    color: white;
+}
+.sm-btn-warning:focus{
+    box-shadow: @warningShadow;
+    color: white;
 }
