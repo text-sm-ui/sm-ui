@@ -3,13 +3,13 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:12:48
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-13 09:21:28
+ * @LastEditTime: 2019-10-13 10:36:59
  */
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-import './index.css';
+import './index.less';
 
 class Button extends Component {
     static defaultProps = {
