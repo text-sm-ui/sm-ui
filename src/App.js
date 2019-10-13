@@ -3,17 +3,17 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-13 09:21:46
+ * @LastEditTime: 2019-10-13 11:49:52
  */
 import React from 'react';
 
-import { Button } from './components';
+import { SmButton } from './components';
 
 export default class App extends React.Component {
     render() {
         return (
             <div>
-                <Button type='danger'>删除</Button>
+                <SmButton type='danger'>删除</SmButton>
             </div>
         )
     }
