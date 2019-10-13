@@ -13,7 +13,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                <SmButton type='danger'>删除</SmButton>
+                <SmButton type='danger'>按钮</SmButton>
             </div>
         )
     }
