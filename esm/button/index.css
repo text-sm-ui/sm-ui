@@ -1,0 +1,33 @@
+.sm-button{
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: white;
+    padding: 0 12px;
+    cursor: pointer;
+    color: #515a6e;
+    height: 28px;
+    border-radius: 4px;
+    border: 1px solid #dcdee2;
+}
+.sm-button:focus{
+    box-shadow: 0 0 0 1px #eee;
+}
+.sm-button:hover{
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.sm-btn-danger{
+    background-color: #ed4014;
+    border-color: #ed4014;
+    color: white;
+}
+.sm-btn-danger:hover{
+    background-color: #f16643;
+    border-color: #f16643;
+    color: white;
+}
+.sm-btn-danger:focus{
+    color: white;
+    box-shadow: 0 0 0 2px rgba(237,64,20,.2)
+}

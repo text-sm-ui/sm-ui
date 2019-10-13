@@ -1,9 +1,9 @@
 /*
  * @Descripttion: 
  * @Author: lvjing
- * @Date: 2019-10-12 21:59:24
+ * @Date: 2019-10-13 09:09:13
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-13 01:14:07
+ * @LastEditTime: 2019-10-13 09:37:41
  */
 'use strict';
 
@@ -19,4 +19,4 @@ const options = {
     ],
 };
 
-export default options;
+module.exports = options;

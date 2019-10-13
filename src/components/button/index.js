@@ -1,18 +1,17 @@
 /*
- * @Descripttion: button
+ * @Descripttion: 
  * @Author: lvjing
- * @Date: 2019-10-12 20:17:52
+ * @Date: 2019-10-13 09:12:48
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-13 00:52:56
+ * @LastEditTime: 2019-10-13 09:21:28
  */
-
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
 import './index.css';
 
-class SmButton extends Component {
+class Button extends Component {
     static defaultProps = {
         type: 'default',
     }
@@ -28,4 +27,4 @@ class SmButton extends Component {
     }
 };
 
-export default SmButton;
+export default Button;

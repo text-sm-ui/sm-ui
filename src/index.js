@@ -1,12 +1,13 @@
 /*
  * @Descripttion: 
  * @Author: lvjing
- * @Date: 2019-10-12 20:11:46
+ * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-12 20:11:46
+ * @LastEditTime: 2019-10-13 09:17:26
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

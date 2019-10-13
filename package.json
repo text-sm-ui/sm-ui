@@ -1,17 +1,15 @@
 {
   "name": "sm-design",
-  "version": "0.0.5",
+  "version": "0.0.1",
   "description": "A Design UI library for React",
   "main": "lib/index.js",
   "module": "esm/index.js",
   "author": "lvjing",
   "license": "MIT",
   "dependencies": {
-    "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0",
-    "sm-ui": "^1.2.4"
+    "react-scripts": "3.2.0"
   },
   "repository": {
     "type": "git",
@@ -26,18 +24,21 @@
   ],
   "homepage": "https://github.com/text-sm-ui/sm-ui#readme",
   "keywords": [
-    "sm-ui"
+    "sm-design"
   ],
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
     "build:commonjs": "cross-env BABEL_OUTPUT=commonjs babel src/components --out-dir lib/ --ignore **/__tests__,**/__mocks__",
     "build:esm": "babel src/components --out-dir esm/ --ignore **/__tests__,**/__mocks__",
     "copy-css:esm": "cpx \"src/components/**/*.css\" esm",
     "copy-css:lib": "cpx \"src/components/**/*.css\" lib",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -61,6 +62,7 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "cpx": "^1.5.0",
-    "cross-env": "^6.0.3"
+    "cross-env": "^6.0.3",
+    "prop-types": "^15.7.2"
   }
 }
