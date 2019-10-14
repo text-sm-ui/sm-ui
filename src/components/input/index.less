@@ -6,12 +6,11 @@
     .iconfont{
         position: absolute;
         top: 50%;
-        right: -6px;
+        right: 6px;
         transform: translateY(-50%);
         cursor: pointer;
         color: #bfbfbf;
         z-index: 99;
-        display: none;
     }
     .iconfont:hover{
         color: #707070;
@@ -31,17 +30,18 @@
 
 .sm-input{
     outline: none;
-    padding: 0px;
     border: 1px solid #dcdee2;
     min-height: 28px;
     border-radius: 4px;
     padding: 0 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 .sm-input-omit{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-}   
+}
 
 .sm-input:focus{
     border-color: @primary;

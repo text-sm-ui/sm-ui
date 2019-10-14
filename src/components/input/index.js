@@ -1,9 +1,9 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 14:55:54
- * @LastEditTime: 2019-10-13 18:19:43
+ * @LastEditTime: 2019-10-14 10:00:32
  * @LastEditors: lvjing
- * @Description: 
+ * @Description:
  */
 import React, { Component } from 'react';
 
@@ -12,7 +12,12 @@ import PropTypes from 'prop-types';
 import './index.less';
 
 export default class Input extends Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: this.props.defaultValue
+        }
+    }
     static defaultProps = {
         type: 'text',
         omit: false,
@@ -26,20 +31,25 @@ export default class Input extends Component {
         placeholder: PropTypes.any,
         allowClear: PropTypes.oneOf([true, false]),
     }
-    
-    handleClear = () => {
-        console.log(this.props.allowClear)
+
+    handleOnChange = (e) => {
+        let val = e ? e.target.value : '';
+        this.setState({
+            value: val
+        }, () => {
+            this.props.onChange(this.state.value)
+        })
     }
 
     render() {
-        console.log()
+        const allowClearType = this.state.value;
         return (
             <div  className='sm-input-wrapper' style={this.props.style}>
-                <input type='text' className={['sm-input', this.props.omit ? 'sm-input-omit' : ''].join(' ')} 
-                    value={this.props.defaultValue}
+                <input type='text' className={['sm-input', this.props.omit ? 'sm-input-omit' : ''].join(' ')}
+                    value={this.state.value}
                     placeholder={this.props.placeholder}
-                    onChange={this.props.onChange}/>
-                { this.props.allowClear ? <i className='iconfont icon-danseshixintubiao-'></i> : null }
+                    onChange={this.handleOnChange}/>
+                { this.props.allowClear && allowClearType ? <i className='iconfont icon-danseshixintubiao-' onClick={() => this.handleOnChange('')}></i> : null }
             </div>
         )
     }
