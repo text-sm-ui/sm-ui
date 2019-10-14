@@ -4,3 +4,68 @@
 @primaryShadow: 0 0 0 2px rgba(45,140,240,.2);
 @dangerShadow: 0 0 0 2px rgba(237,64,20,.2);
 @warningShadow: 0 0 0 2px rgba(255,153,0,.2);
+
+*{
+    margin: 0px;
+    padding: 0;
+}
+
+.sm-input{
+    outline: none;
+    border: 1px solid #dcdee2;
+    min-height: 30px;
+    border-radius: 4px;
+    padding: 0 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sm-input:focus{
+    border-color: @primary;
+}
+.sm-input:focus{
+    box-shadow: @primaryShadow
+}
+
+.sm-input-danger,
+.sm-input-danger:focus{
+    border-color: @danger;
+}
+
+.sm-input-danger:focus{
+    box-shadow: @dangerShadow;
+}
+
+.sm-input-warning,
+.sm-input-warning:focus{
+    border-color: @warning;
+}
+
+.sm-input-warning:focus{
+    box-shadow: @warningShadow;
+}
+
+.sm-input:disabled {
+    color: #c5c8ce;
+    background-color: #f7f7f7;
+    border-color: #dcdee2 !important;
+    cursor: not-allowed;
+}
+
+.sm-input-wrapper:hover{
+    .sm-input{
+        border-color: @primary;
+    }
+    .sm-input-danger{
+        border-color: @danger;
+    }
+    .sm-input-warning{
+        border-color: @warning;
+    }
+}
+li{
+    list-style: none;
+}
+body{
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,Arial,sans-serif;
+}

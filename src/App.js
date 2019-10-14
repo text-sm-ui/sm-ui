@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-14 12:36:35
+ * @LastEditTime: 2019-10-14 17:26:21
  */
 import React from 'react';
 
@@ -20,14 +20,17 @@ export default class App extends React.Component {
         console.log('点击事件')
     }
 
-    handleChange = (val) => {
-        console.log(val);
+    handleChange = (e) => {
+        this.setState({
+            value: e.target.value
+        })
     }
 
     render() {
         return (
             <div style={{ marginLeft: '30px' }}>
                 <SmButton type='danger' onClick={this.hangleClick} style={{ marginBottom: 10, marginRight: 20 }}>按钮</SmButton>
+                <br/>
                 <SmInput style={{ width: '180px' }}
                     type='password'
                     onChange={this.handleChange}
@@ -35,8 +38,9 @@ export default class App extends React.Component {
                     placeholder='请输入文字'
                     omit
                     allowClear></SmInput>
-
-                <SmSelect></SmSelect>
+                <br/>
+                <br/>
+                <SmSelect style={{ width: 180 }}></SmSelect>
             </div>
         )
     }

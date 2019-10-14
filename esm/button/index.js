@@ -1,15 +1,15 @@
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 /*
- * @Descripttion: 
+ * @Descripttion:
  * @Author: lvjing
  * @Date: 2019-10-13 09:12:48
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-13 09:21:28
+ * @LastEditTime: 2019-10-14 10:58:51
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './index.css';
+import './index.less';
 
 var Button =
 /*#__PURE__*/
@@ -24,18 +24,23 @@ function (_Component) {
 
   _proto.render = function render() {
     return React.createElement("button", {
-      className: ['sm-button', "sm-btn-" + this.props.type].join(' ')
-    }, this.props.children);
+      className: ['sm-button', "sm-btn-" + this.props.type].join(' '),
+      onClick: this.props.onClick,
+      disabled: this.props.disabled,
+      style: this.props.style
+    }, React.createElement("span", null, this.props.children));
   };
 
   return Button;
 }(Component);
 
+export { Button as default };
+;
 Button.defaultProps = {
-  type: 'default'
+  type: 'default',
+  disabled: false
 };
 Button.propTypes = {
-  type: PropTypes.string
+  type: PropTypes.oneOf(['default', 'primary', 'danger', 'warning']),
+  disabled: PropTypes.oneOf([true, false])
 };
-;
-export default Button;

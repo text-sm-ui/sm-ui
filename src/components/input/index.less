@@ -3,6 +3,7 @@
     display: inline-block;
     width: 100%;
     position: relative;
+    min-height: 30px;
     .iconfont{
         position: absolute;
         top: 50%;
@@ -28,52 +29,10 @@
     }
 }
 
-.sm-input{
-    outline: none;
-    border: 1px solid #dcdee2;
-    min-height: 28px;
-    border-radius: 4px;
-    padding: 0 10px;
-    width: 100%;
-    box-sizing: border-box;
-}
 .sm-input-omit{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-}
-
-.sm-input:focus{
-    border-color: @primary;
-}
-.sm-input:focus{
-    box-shadow: @primaryShadow
-}
-
-.sm-input-danger,
-.sm-input-danger:focus{
-    border-color: @danger;
-}
-
-.sm-input-danger:focus{
-    box-shadow: @dangerShadow;
-}
-
-.sm-input-warning,
-.sm-input-warning:focus{
-    border-color: @warning;
-}
-
-.sm-input-warning:focus{
-    box-shadow: @warningShadow;
-}
-
-.sm-input:disabled {
-    color: #c5c8ce;
-    background-color: #f7f7f7;
-    border-color: #dcdee2 !important;
-    cursor: not-allowed;
-
 }
 
 
