@@ -68,6 +68,14 @@
     box-shadow: @warningShadow;
 }
 
+.sm-input:disabled {
+    color: #c5c8ce;
+    background-color: #f7f7f7;
+    border-color: #dcdee2 !important;
+    cursor: not-allowed;
+
+}
+
 
 input::-webkit-input-placeholder{
     color:#dcdee2;
@@ -80,4 +88,12 @@ input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
 }
 input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
     color:#dcdee2;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"]{
+  -moz-appearance: textfield;
 }

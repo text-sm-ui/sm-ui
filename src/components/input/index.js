@@ -1,7 +1,7 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 14:55:54
- * @LastEditTime: 2019-10-14 10:00:32
+ * @LastEditTime: 2019-10-14 13:30:26
  * @LastEditors: lvjing
  * @Description:
  */
@@ -18,19 +18,6 @@ export default class Input extends Component {
             value: this.props.defaultValue
         }
     }
-    static defaultProps = {
-        type: 'text',
-        omit: false,
-        placeholder: '请输入',
-        allowClear: false
-    }
-
-    static propTypes = {
-        type: PropTypes.oneOf(['text', 'number', 'password']),
-        omit: PropTypes.oneOf([true, false]),
-        placeholder: PropTypes.any,
-        allowClear: PropTypes.oneOf([true, false]),
-    }
 
     handleOnChange = (e) => {
         let val = e ? e.target.value : '';
@@ -45,12 +32,37 @@ export default class Input extends Component {
         const allowClearType = this.state.value;
         return (
             <div  className='sm-input-wrapper' style={this.props.style}>
-                <input type='text' className={['sm-input', this.props.omit ? 'sm-input-omit' : ''].join(' ')}
+                <input className={['sm-input', this.props.omit ? 'sm-input-omit' : ''].join(' ')}
+                    type={this.props.type}
+                    disabled={this.props.disabled}
+                    maxLength={this.props.maxlength}
+                    max={this.props.max}
+                    min={this.props.min}
                     value={this.state.value}
                     placeholder={this.props.placeholder}
                     onChange={this.handleOnChange}/>
-                { this.props.allowClear && allowClearType ? <i className='iconfont icon-danseshixintubiao-' onClick={() => this.handleOnChange('')}></i> : null }
+                { this.props.allowClear && allowClearType && this.props.type !== 'password' ? <i className='iconfont icon-danseshixintubiao-' onClick={() => this.handleOnChange('')}></i> : null }
             </div>
         )
     }
+}
+
+Input.defaultProps = {
+    type: 'text',
+    omit: false,
+    placeholder: '请输入~~',
+    allowClear: false,
+    disabled: false
+}
+
+Input.propTypes = {
+    type: PropTypes.oneOf(['text', 'number', 'password']),
+    placeholder: PropTypes.any,
+    allowClear: PropTypes.oneOf([true, false]),
+    disabled: PropTypes.oneOf([true, false]),
+    omit: PropTypes.oneOf([true, false]),
+    onChange: PropTypes.func.isRequired,
+    maxlength: PropTypes.string,
+    max: PropTypes.number,
+    min: PropTypes.number
 }

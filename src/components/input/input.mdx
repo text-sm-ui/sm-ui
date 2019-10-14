@@ -6,6 +6,7 @@ route: /input
 import { Playground, Props  } from 'docz'
 import Input from './index.js'
 
+
 # Input
 
 <Props of={Input} />
@@ -13,6 +14,7 @@ import Input from './index.js'
 ## Basic usage
 
 <Playground>
-    <Input style={{ marginRight: '15px' }} style={{ width: 180, }}/>
-    <Input style={{ marginRight: '15px' }} omit/>
+    <Input style={{ marginRight: '15px' }} style={{ width: 180, marginRight: 10}}/>
+    <Input style={{ marginRight: '15px' }} style={{ width: 180, marginRight: 10 }} omit defaultValue='很长一串的默认值啦啦啦啦啦'/>
+    <Input style={{ marginRight: '15px' }} style={{ width: 180, marginRight: 10}} disabled/>
 </Playground>
