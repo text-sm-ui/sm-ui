@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-14 18:27:02
+ * @LastEditTime: 2019-10-14 23:04:18
  */
 
 import React, { Component } from 'react';
@@ -12,50 +12,78 @@ import PropTypes from 'prop-types';
 
 import './index.less';
 
-class Options extends Component {
-    render() {
-        return (
-            <div></div>
-        )
-    }
-}
-
 export default class Select extends Component {
     constructor(props) {
         super(props);
         this.state = {
             showList: false,
-            list: [
-                {name: '第一项', id: 1},
-                {name: '第一项', id: 2},
-                {name: '第一项', id: 3},
-                {name: '第一项', id: 4},
-                {name: '第一项', id: 5},
-            ]
+            label: '',
+            value: this.props.defaultValue ? this.props.defaultValue : ''
         }
     }
 
-    handleOnClick = () => {
-
+    handleOnClick = (v) => {
+        this.setState({
+            label: v.label,
+            value: v.value,
+            showList: false
+        }, () => {
+            this.props.onChange(v)
+        })
     }
+
+    nodataDom = () => {
+        return <div className='sm-select-nodata slideUpIn'>暂无数据</div>
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if ((nextProps.defaultValue === prevState.value) && !prevState.label) {
+            const filterLabel = nextProps.options.filter(v => v.value === prevState.value)[0];
+            const label = filterLabel ? filterLabel.label : ''
+            return {
+                label: label
+            }
+        }
+        return null;
+    }
+
     render() {
+        const options = this.props.options;
         return (
             <div className='sm-input-wrapper' style={this.props.style}>
                 <input type='text' className={['sm-input'].join(' ')}
                     onClick={() => this.setState({showList: true})}
-                    onBlur={() => this.setState({showList: false})} />
+                    placeholder={this.props.placeholder}
+                    value={this.state.label}
+                    readOnly
+                    onChange={(e) => this.setState({label: e.target.value})}
+                    />
                 <i className='iconfont icon-arrow-left'></i>
-                <div className={['sm-select-list', 'bounceInDown animated'].join(' ')}
-                    style={this.state.showList ? {'display': 'block'} : {'display': 'none'}}>
-                    <ul>
-                        <li data-value='1' onClick={this.handleOnClick}>第一项</li>
-                        <li data-value='2'>第二项</li>
-                        <li data-value='3'>第三项</li>
-                        <li data-value='4'>第四项</li>
-                        <li data-value='5'>第五项</li>
-                    </ul>
-                </div>
+                {
+                    options.length > 0 ? (<div className={['sm-select-list', 'slideUpIn'].join(' ')}
+                            style={this.state.showList ? {'display': 'block'} : {'display': 'none'}}>
+                            <ul>
+                                { options.map((v, i) => {
+                                    return (
+                                        <li key={i} onClick={() => this.handleOnClick(v)} 
+                                        className={this.state.value === v.value ? 'sm-select-checked' : null}>{v.label}</li>
+                                    )
+                                }) }
+                            </ul>
+                        </div>)
+                    : this.nodataDom()
+                }
             </div>
         )
     }
+}
+
+Select.propTypes = {
+    placeholder: PropTypes.string,
+    options: PropTypes.array
+}
+
+Select.defaultProps = {
+    placeholder: '请选择',
+    options: []
 }

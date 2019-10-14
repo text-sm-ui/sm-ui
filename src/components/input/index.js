@@ -1,7 +1,7 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 14:55:54
- * @LastEditTime: 2019-10-14 17:27:06
+ * @LastEditTime: 2019-10-14 21:30:28
  * @LastEditors: lvjing
  * @Description:
  */
@@ -12,15 +12,6 @@ import PropTypes from 'prop-types';
 import './index.less';
 
 export default class Input extends Component {
-    handleOnChange = (e) => {
-        let val = e ? e.target.value : '';
-        this.setState({
-            value: val
-        }, () => {
-            this.props.onChange(this.state.value)
-        })
-    }
-
     render() {
         return (
             <div className='sm-input-wrapper' style={this.props.style}>
