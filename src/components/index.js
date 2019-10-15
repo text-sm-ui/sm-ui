@@ -1,7 +1,7 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 12:55:31
- * @LastEditTime: 2019-10-15 13:42:44
+ * @LastEditTime: 2019-10-15 18:23:27
  * @LastEditors: lvjing
  * @Description:
  */
@@ -12,3 +12,5 @@ export { default as SmInput } from './input';
 export { default as SmSelect } from './select';
 
 export { default as SmCheckbox } from './checkbox';
+
+export { default as SmRadio } from './radio';

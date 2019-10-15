@@ -1,10 +1,12 @@
 @import '../styles/index.less';
 
-.sm-checkbox{
+
+.sm-radio{
     display: flex;
     align-items: center;
+    float: left;
 }
-.sm-checkbox-wapper{
+.sm-radio-wapper{
     display: block;
     width: 16px;
     height: 16px;
@@ -28,7 +30,7 @@
 }
 
 
-.sm-checkbox-checked-primary{
+.sm-radio-checked-primary{
     background: @primary;
     border-color: @primary;
     box-shadow: @primaryShadow;
@@ -38,7 +40,7 @@
     }
 }
 
-.sm-checkbox-checked-danger{
+.sm-radio-checked-danger{
     background: @danger;
     border-color: @danger;
     box-shadow: @dangerShadow;
@@ -47,7 +49,7 @@
     }
 }
 
-.sm-checkbox-checked-warning{
+.sm-radio-checked-warning{
     background: @warning;
     border-color: @warning;
     box-shadow: @warningShadow;
@@ -57,14 +59,14 @@
 }
 
 
-.sm-checkbox-disabled{
+.sm-radio-disabled{
     cursor: not-allowed;
     color: #ccc;
     .icon-gouxuan-{
         color: #ccc;
     }
 }
-.sm-checkbox-disabled-span{
+.sm-radio-disabled-span{
     background:white;
     border-color: #ccc;
     box-shadow: none;

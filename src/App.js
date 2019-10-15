@@ -3,11 +3,11 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-15 18:07:58
+ * @LastEditTime: 2019-10-15 18:31:32
  */
 import React from 'react';
 
-import { SmButton, SmInput, SmSelect, SmCheckbox } from './components';
+import { SmButton, SmInput, SmSelect, SmCheckbox, SmRadio } from './components';
 
 export default class App extends React.Component {
     constructor(props){
@@ -65,12 +65,14 @@ export default class App extends React.Component {
                 </SmSelect>
                 <br/>
                 <br/>
+                <SmCheckbox defaultChecked={this.state.defaultChecked}
+                    onClick={this.handleCheckChange}
+                    disabled>
+                    <span style={{ marginLeft: 12 }}>苹果</span>
+                </SmCheckbox>
+                <br/>
                 <div>
-                    <SmCheckbox defaultChecked={this.state.defaultChecked}
-                        onClick={this.handleCheckChange}
-                        disabled>
-                        <span style={{ marginLeft: 12 }}>苹果</span>
-                    </SmCheckbox>
+                    <SmRadio></SmRadio>
                 </div>
             </div>
         )
