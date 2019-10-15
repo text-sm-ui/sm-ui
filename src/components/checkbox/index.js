@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-15 13:40:50
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-15 15:25:29
+ * @LastEditTime: 2019-10-15 18:12:21
  */
 import React, { Component } from 'react';
 
@@ -27,16 +27,18 @@ export default class Checkbox extends Component {
             <div className={['sm-checkbox', this.props.disabled ? 'sm-checkbox-disabled' : null].join(' ')}
                 style={this.props.style}>
                 <span
-                    onClick={this.props.onClick}
+                    onClick={!this.props.disabled ? this.props.onClick : () => false}
                     className={['sm-checkbox-wapper',
                     this.props.defaultChecked ? `sm-checkbox-checked-${this.props.type}` : '',
-                    this.props.disabled ? 'sm-checkbox-disabled' : null].join(' ')}
+                    this.props.disabled ? 'sm-checkbox-disabled-span' : null].join(' ')}
                 >
                     {
                         this.props.defaultChecked ? <i className='iconfont icon-gouxuan-'></i> : null
                     }
                 </span>
-                { this.props.children }
+                <div>
+                    { this.props.children }
+                </div>
             </div>
         )
     }

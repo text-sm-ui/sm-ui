@@ -3,7 +3,7 @@
 .sm-checkbox{
     display: flex;
     align-items: center;
-    min-width: 20px;
+    float: left;
 }
 .sm-checkbox-wapper{
     display: block;
@@ -28,10 +28,6 @@
     }
 }
 
-.sm-checkbox-disabled{
-    cursor: not-allowed;
-    background: #dcdee2;
-}
 
 .sm-checkbox-checked-primary{
     background: @primary;
@@ -59,4 +55,19 @@
     i{
         color: white;
     }
+}
+
+
+.sm-checkbox-disabled{
+    cursor: not-allowed;
+    color: #ccc;
+    .icon-gouxuan-{
+        color: #ccc;
+    }
+}
+.sm-checkbox-disabled-span{
+    background:white;
+    border-color: #ccc;
+    box-shadow: none;
+    cursor: not-allowed;
 }
