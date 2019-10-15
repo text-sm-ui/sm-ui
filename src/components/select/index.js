@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-14 23:04:18
+ * @LastEditTime: 2019-10-15 09:30:27
  */
 
 import React, { Component } from 'react';
@@ -32,8 +32,38 @@ export default class Select extends Component {
         })
     }
 
+    handleInputOnClick = () => {
+        this.setState({showList: true})
+    }
+
+    haveDataDom = () => {
+        if (!this.state.showList) return;
+        return (
+            <div className={['sm-select-list', 'slideUpIn'].join(' ')}
+                style={this.state.showList ? {'display': 'block'} : {'display': 'none'}}>
+                <ul>
+                    { this.props.options.map((v, i) => {
+                        return (
+                            <li key={i} onClick={() => this.handleOnClick(v)}
+                            className={this.state.value === v.value ? 'sm-select-checked' : null}>{v.label}</li>
+                        )
+                    }) }
+                </ul>
+            </div>
+        )
+    }
+
+    handleBlur = () => {
+        setTimeout(() => {
+            this.setState({showList: false})
+        }, 200);
+    }
+
     nodataDom = () => {
-        return <div className='sm-select-nodata slideUpIn'>暂无数据</div>
+        if (!this.state.showList) return;
+        return <div className='sm-select-nodata slideUpIn'>
+            <p>暂无数据</p>
+        </div>
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -48,11 +78,11 @@ export default class Select extends Component {
     }
 
     render() {
-        const options = this.props.options;
         return (
             <div className='sm-input-wrapper' style={this.props.style}>
                 <input type='text' className={['sm-input'].join(' ')}
-                    onClick={() => this.setState({showList: true})}
+                    onClick={this.handleInputOnClick}
+                    onBlur={this.handleBlur}
                     placeholder={this.props.placeholder}
                     value={this.state.label}
                     readOnly
@@ -60,18 +90,7 @@ export default class Select extends Component {
                     />
                 <i className='iconfont icon-arrow-left'></i>
                 {
-                    options.length > 0 ? (<div className={['sm-select-list', 'slideUpIn'].join(' ')}
-                            style={this.state.showList ? {'display': 'block'} : {'display': 'none'}}>
-                            <ul>
-                                { options.map((v, i) => {
-                                    return (
-                                        <li key={i} onClick={() => this.handleOnClick(v)} 
-                                        className={this.state.value === v.value ? 'sm-select-checked' : null}>{v.label}</li>
-                                    )
-                                }) }
-                            </ul>
-                        </div>)
-                    : this.nodataDom()
+                    this.props.options.length > 0 ? this.haveDataDom() : this.nodataDom()
                 }
             </div>
         )
@@ -80,7 +99,8 @@ export default class Select extends Component {
 
 Select.propTypes = {
     placeholder: PropTypes.string,
-    options: PropTypes.array
+    options: PropTypes.array,
+    onChange: PropTypes.func
 }
 
 Select.defaultProps = {
