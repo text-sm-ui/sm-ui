@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-15 09:28:27
+ * @LastEditTime: 2019-10-15 09:38:21
  */
 import React from 'react';
 
@@ -54,7 +54,8 @@ export default class App extends React.Component {
                 <SmSelect style={{ width: 180 }}
                     onChange={this.hangleSelectChange}
                     options={this.state.options}
-                    defaultValue={4}></SmSelect>
+                    defaultValue={4}
+                    showSearch></SmSelect>
             </div>
         )
     }

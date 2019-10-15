@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-15 09:30:27
+ * @LastEditTime: 2019-10-15 11:02:09
  */
 
 import React, { Component } from 'react';
@@ -17,8 +17,11 @@ export default class Select extends Component {
         super(props);
         this.state = {
             showList: false,
+            showListData: this.props.options,
             label: '',
-            value: this.props.defaultValue ? this.props.defaultValue : ''
+            value: this.props.defaultValue ? this.props.defaultValue : '',
+            count: 0
+
         }
     }
 
@@ -26,7 +29,8 @@ export default class Select extends Component {
         this.setState({
             label: v.label,
             value: v.value,
-            showList: false
+            showList: false,
+            showListData: this.props.options
         }, () => {
             this.props.onChange(v)
         })
@@ -36,13 +40,40 @@ export default class Select extends Component {
         this.setState({showList: true})
     }
 
+    handleInputOnChange = (e) => {
+        if (!this.props.showSearch) {
+            this.setState({
+                label: e.target.value
+            });
+        } else {
+            let showListData = this.props.options.filter(v => v.label.indexOf(e.target.value) !== -1);
+            this.setState({
+                label: e.target.value,
+                showListData: showListData
+            });
+        }
+    }
+
+
+    handleBlur = () => {
+        setTimeout(() => {
+            let filterLabel = this.props.options.filter(v => v.value === this.state.value)[0];
+            let label = filterLabel ? filterLabel.label : ''
+            this.setState({
+                showList: false,
+                label: label,
+                showListData: this.props.options,
+            });
+        }, 200);
+    }
+
     haveDataDom = () => {
         if (!this.state.showList) return;
         return (
             <div className={['sm-select-list', 'slideUpIn'].join(' ')}
                 style={this.state.showList ? {'display': 'block'} : {'display': 'none'}}>
                 <ul>
-                    { this.props.options.map((v, i) => {
+                    { this.state.showListData.map((v, i) => {
                         return (
                             <li key={i} onClick={() => this.handleOnClick(v)}
                             className={this.state.value === v.value ? 'sm-select-checked' : null}>{v.label}</li>
@@ -53,12 +84,6 @@ export default class Select extends Component {
         )
     }
 
-    handleBlur = () => {
-        setTimeout(() => {
-            this.setState({showList: false})
-        }, 200);
-    }
-
     nodataDom = () => {
         if (!this.state.showList) return;
         return <div className='sm-select-nodata slideUpIn'>
@@ -67,11 +92,12 @@ export default class Select extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if ((nextProps.defaultValue === prevState.value) && !prevState.label) {
+        if ((nextProps.defaultValue === prevState.value) && !prevState.label && !prevState.count) {
             const filterLabel = nextProps.options.filter(v => v.value === prevState.value)[0];
             const label = filterLabel ? filterLabel.label : ''
             return {
-                label: label
+                label: label,
+                count: 1
             }
         }
         return null;
@@ -85,8 +111,8 @@ export default class Select extends Component {
                     onBlur={this.handleBlur}
                     placeholder={this.props.placeholder}
                     value={this.state.label}
-                    readOnly
-                    onChange={(e) => this.setState({label: e.target.value})}
+                    readOnly={!this.props.showSearch}
+                    onChange={this.handleInputOnChange}
                     />
                 <i className='iconfont icon-arrow-left'></i>
                 {
@@ -100,10 +126,12 @@ export default class Select extends Component {
 Select.propTypes = {
     placeholder: PropTypes.string,
     options: PropTypes.array,
+    showSearch: PropTypes.oneOf([true, false]),
     onChange: PropTypes.func
 }
 
 Select.defaultProps = {
     placeholder: '请选择',
+    showSearch: false,
     options: []
 }
