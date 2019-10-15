@@ -69,7 +69,20 @@
         transform: scaleY(1);
     }
 }
-
 .slideUpIn {
     animation: slideUpIn 0.8s;
+}
+
+@keyframes rotating{
+    from{
+        transform: rotate(0)
+    }
+    to{
+        transform: rotate(180deg)
+    }
+}
+
+.rotating{
+    // animation: rotating 0.8s;
+    transform: translateY(-50%) rotate(180deg) !important;
 }

@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-15 11:02:09
+ * @LastEditTime: 2019-10-15 15:04:58
  */
 
 import React, { Component } from 'react';
@@ -32,7 +32,12 @@ export default class Select extends Component {
             showList: false,
             showListData: this.props.options
         }, () => {
-            this.props.onChange(v)
+            try{
+                this.props.onChange(v)
+            }
+            catch{
+                console.error("error")
+            }
         })
     }
 
@@ -49,7 +54,7 @@ export default class Select extends Component {
             let showListData = this.props.options.filter(v => v.label.indexOf(e.target.value) !== -1);
             this.setState({
                 label: e.target.value,
-                showListData: showListData
+                showListData: showListData.length ? showListData : []
             });
         }
     }
@@ -114,9 +119,9 @@ export default class Select extends Component {
                     readOnly={!this.props.showSearch}
                     onChange={this.handleInputOnChange}
                     />
-                <i className='iconfont icon-arrow-left'></i>
+                <i className={['iconfont icon-arrow-left', this.state.showList ? 'rotating' : ''].join(' ')}></i>
                 {
-                    this.props.options.length > 0 ? this.haveDataDom() : this.nodataDom()
+                    this.state.showListData.length > 0 ? this.haveDataDom() : this.nodataDom()
                 }
             </div>
         )

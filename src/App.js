@@ -3,23 +3,23 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-15 09:38:21
+ * @LastEditTime: 2019-10-15 15:25:04
  */
 import React from 'react';
 
-import { SmButton, SmInput, SmSelect } from './components';
+import { SmButton, SmInput, SmSelect, SmCheckbox } from './components';
 
 export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             value: 1,
+            defaultChecked: true,
             options: [
-                {label: '第一项第一项第一项第一项第一项第一项第一项', value: 1},
+                {label: '第一项', value: 1},
                 {label: '第二项', value: 2},
                 {label: '第三项', value: 3},
-                {label: '第四项', value: 4},
-                {label: '第五项', value: 5},
+                {label: '第四项', value: 4}
             ]
         }
     }
@@ -35,6 +35,12 @@ export default class App extends React.Component {
 
     hangleSelectChange = (val) => {
         console.log(val);
+    }
+
+    handleCheckChange = () => {
+        this.setState({
+            defaultChecked: !this.state.defaultChecked
+        })
     }
 
     render() {
@@ -55,7 +61,17 @@ export default class App extends React.Component {
                     onChange={this.hangleSelectChange}
                     options={this.state.options}
                     defaultValue={4}
-                    showSearch></SmSelect>
+                    showSearch>
+                </SmSelect>
+                <br/>
+                <br/>
+                <div>
+                    <SmCheckbox defaultChecked={this.state.defaultChecked}
+                        onClick={this.handleCheckChange}
+                        disabled>
+                        <span style={{ marginLeft: 12 }}>苹果</span>
+                    </SmCheckbox>
+                </div>
             </div>
         )
     }
