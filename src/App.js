@@ -3,11 +3,13 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-16 14:41:43
+ * @LastEditTime: 2019-10-16 17:21:59
  */
 import React from 'react';
 
-import { SmCheckbox, SmRadio } from './components';
+import { SmTable } from './components';
+
+const { Column } = SmTable
 
 export default class App extends React.Component {
     constructor(props){
@@ -99,9 +101,33 @@ export default class App extends React.Component {
                     </SmRadio.Group> */}
                     {/* <SmRadio onClick={this.handleCheckChange} defaultChecked={this.state.defaultChecked}><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio> */}
                 </div>
+                <SmTable dataSource={dataSource}>
+                    <Column title='姓名' dataIndex='name' render={(row, index) => {
+                        console.log(row, index)
+                        return (
+                            <span>{ row.name }</span>
+                        )
+                    }}>
+                    </Column>
+                    <Column title='年龄' dataIndex='age'></Column>
+                    <Column title='地址' dataIndex='address'></Column>
+                </SmTable>
             </div>
         )
     }
 }
+
+const dataSource = [
+    {
+      name: '胡彦斌',
+      age: 32,
+      address: '西湖区湖底公园1号',
+    },
+    {
+      name: '胡彦祖',
+      age: 42,
+      address: '西湖区湖底公园9999号',
+    },
+];
 
 
