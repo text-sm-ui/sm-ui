@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-16 14:42:56
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-16 17:20:58
+ * @LastEditTime: 2019-10-16 18:45:45
  */
 
 
@@ -11,18 +11,53 @@ import React, { Component } from 'react'
 
 import PropTypes from 'prop-types';
 
+import { SmCheckbox } from '../index'
+
 import './index.less';
+import { tsThisType } from '@babel/types';
 
 export default class Table extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataSource: this.props.dataSource,
+            checkedAll: false
+        }
+    }
+    handlOnclickBox = (v, i) => {
+        this.setState({
+            dataSource: this.state.dataSource.map((c, d) => d === i ? {...c, checked: !c.checked} : {...c})
+        }, () => {
+            this.props.onChange(this.state.dataSource.filter(f => f.checked), v, i, this.state.dataSource)
+        })
+    }
+
+    handleCheckAll = () => {
+        this.setState({
+            dataSource: this.state.dataSource.map(c => c.checked === this.state.checkedAll ? {...c, checked: !c.checked} : {...c}),
+            checkedAll: !this.state.checkedAll
+        })
+    }
+
+    hanndleSelect = (v, i, a) => {
+        return this.props.rowSelect ?
+            <td><SmCheckbox defaultChecked={ a ? this.state.checkedAll : v ? v.checked : false}
+                onClick={() => a ? this.handleCheckAll() : this.handlOnclickBox(v, i)}></SmCheckbox></td>
+            : null
+    }
+
     render() {
         return (
             <table className='sm-table'>
                 <thead>
                     <tr>
                         {
+                            this.hanndleSelect('', '', 'a')
+                        }
+                        {
                             React.Children.map(this.props.children, child => {
                                 return React.cloneElement(child, {
-                                    dataSource: this.props.dataSource,
+                                    dataSource: this.state.dataSource,
                                     isTitle: true
                                 })
                             })
@@ -31,8 +66,11 @@ export default class Table extends Component {
                 </thead>
                 <tbody>
                     {
-                        this.props.dataSource.map((v, i) => {
+                        this.state.dataSource.map((v, i) => {
                             return <tr key={i}>
+                                {
+                                    this.hanndleSelect(v, i)
+                                }
                                 {
                                     React.Children.map(this.props.children, child => {
                                         return React.cloneElement(child, {

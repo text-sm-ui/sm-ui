@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-16 17:21:59
+ * @LastEditTime: 2019-10-16 18:32:55
  */
 import React from 'react';
 
@@ -23,6 +23,20 @@ export default class App extends React.Component {
                 {label: '第二项', value: 2},
                 {label: '第三项', value: 3},
                 {label: '第四项', value: 4}
+            ],
+            dataSource: [
+                {
+                  name: '胡彦斌',
+                  age: 32,
+                  address: '西湖区湖底公园1号',
+                  checked: false
+                },
+                {
+                  name: '胡彦祖',
+                  age: 42,
+                  address: '西湖区湖底公园9999号',
+                  checked: true
+                },
             ]
         }
     }
@@ -44,6 +58,13 @@ export default class App extends React.Component {
         console.log(val);
         this.setState({
             defaultChecked: !this.state.defaultChecked
+        })
+    }
+
+    handleTableChange = (selected, v, i, data) => {
+        console.log(selected, v, i, data);
+        this.setState({
+            dataSource: data
         })
     }
 
@@ -101,11 +122,11 @@ export default class App extends React.Component {
                     </SmRadio.Group> */}
                     {/* <SmRadio onClick={this.handleCheckChange} defaultChecked={this.state.defaultChecked}><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio> */}
                 </div>
-                <SmTable dataSource={dataSource}>
+                <SmTable dataSource={this.state.dataSource}
+                    rowSelect onChange={this.handleTableChange}>
                     <Column title='姓名' dataIndex='name' render={(row, index) => {
-                        console.log(row, index)
                         return (
-                            <span>{ row.name }</span>
+                            <span>{ row.name + index }</span>
                         )
                     }}>
                     </Column>
@@ -116,18 +137,5 @@ export default class App extends React.Component {
         )
     }
 }
-
-const dataSource = [
-    {
-      name: '胡彦斌',
-      age: 32,
-      address: '西湖区湖底公园1号',
-    },
-    {
-      name: '胡彦祖',
-      age: 42,
-      address: '西湖区湖底公园9999号',
-    },
-];
 
 
