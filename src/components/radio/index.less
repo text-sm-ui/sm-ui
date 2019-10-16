@@ -12,7 +12,7 @@
     height: 16px;
     background: white;
     border: 1px solid #dcdee2;
-    border-radius: 2px;
+    border-radius: 90px;
     cursor: pointer;
     position: relative;
     box-sizing: border-box;
@@ -20,41 +20,46 @@
     -moz-user-select:none;
     -o-user-select:none;
     -ms-user-select:none;
-    .icon-gouxuan-{
+    .sm-icon-radio{
         position: absolute;
-        top: -2px;
-        left: 0px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         display: inline-block;
         height: 14px;
+        width: 8px;
+        height: 8px;
+        background: @primary;
+        border-radius: 90px;
     }
 }
 
 
 .sm-radio-checked-primary{
-    background: @primary;
     border-color: @primary;
     box-shadow: @primaryShadow;
     transition: border-color .2s ease-in-out, box-shadow .2s ease-in-out,background-color .2s ease-in-out;
     i{
         color: white;
+        background: #ccc;
     }
 }
 
 .sm-radio-checked-danger{
-    background: @danger;
     border-color: @danger;
     box-shadow: @dangerShadow;
     i{
         color: white;
+        background: #ccc;
     }
 }
 
 .sm-radio-checked-warning{
-    background: @warning;
     border-color: @warning;
     box-shadow: @warningShadow;
     i{
         color: white;
+        background: #ccc;
     }
 }
 
@@ -62,8 +67,9 @@
 .sm-radio-disabled{
     cursor: not-allowed;
     color: #ccc;
-    .icon-gouxuan-{
+    .sm-icon-radio{
         color: #ccc;
+        background: #ccc;
     }
 }
 .sm-radio-disabled-span{

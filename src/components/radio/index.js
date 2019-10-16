@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-15 18:15:59
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-15 18:30:36
+ * @LastEditTime: 2019-10-16 11:30:19
  */
 
 import React, { Component } from 'react';
@@ -12,27 +12,28 @@ import './index.less';
 
 import PropTypes from 'prop-types';
 
-export default class Radio extends Component {
-    componentDidUpdate() {
+class Radio extends Component {
+    handleRadioClick = () => {
         try{
-            this.props.onChange(this.props.defaultChecked)
+            this.props.onChange(this.props.value)
         }
         catch{
-            console.error("error")
+            this.props.onClick();
         }
     }
+
     render() {
         return(
             <div className={['sm-radio', this.props.disabled ? 'sm-radio-disabled' : null].join(' ')}
                 style={this.props.style}>
                 <span
-                    onClick={!this.props.disabled ? this.props.onClick : () => false}
+                    onClick={!this.props.disabled ? this.handleRadioClick : () => false}
                     className={['sm-radio-wapper',
-                    this.props.defaultChecked ? `sm-radio-checked-${this.props.type}` : '',
+                    this.props.defaultChecked || this.props.defaultSelect === this.props.value ? `sm-radio-checked-${this.props.type}` : '',
                     this.props.disabled ? 'sm-radio-disabled-span' : null].join(' ')}
                 >
                     {
-                        this.props.defaultChecked ? <i className='iconfont icon-gouxuan-'></i> : null
+                        this.props.defaultChecked || this.props.defaultSelect === this.props.value ? <i className='sm-icon-radio'></i> : null
                     }
                 </span>
                 <div>
@@ -43,13 +44,35 @@ export default class Radio extends Component {
     }
 }
 
+class Group extends Component {
+    render() {
+        return (
+            <div onChange={this.props.onChange}>
+                {
+                    React.Children.map(this.props.children, child => {
+                        return React.cloneElement(child, {
+                            defaultSelect: this.props.defaultSelect,
+                            onChange: this.props.onChange
+                        })
+                    })
+                }
+            </div>
+        )
+    }
+}
+
+Radio.Group = Group;
+
+export default Radio;
+
+
 Radio.Prototype = {
-    defaultChecked: PropTypes.oneOf([true, false]),
+    defaultSelect: PropTypes.any,
     type: PropTypes.oneOf(['primary', 'danger', 'warning']),
-    onClick: PropTypes.func
+    onChange: PropTypes.func
 }
 
 Radio.defaultProps = {
-    defaultChecked: false,
+    defaultSelect: '',
     type: 'primary'
 }
