@@ -3,11 +3,11 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 09:32:13
+ * @LastEditTime: 2019-10-17 18:16:32
  */
 import React from 'react';
 
-import { SmTable } from './components';
+import { SmTable, SmButton, SmSelect } from './components';
 
 const { Column } = SmTable
 
@@ -19,7 +19,7 @@ export default class App extends React.Component {
             defaultChecked: true,
             defaultSelect: '2',
             options: [
-                {label: '第一项', value: 1},
+                {label: '第一项', value: 1, disabled: true},
                 {label: '第二项', value: 2},
                 {label: '第三项', value: 3},
                 {label: '第四项', value: 4}
@@ -70,7 +70,15 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div style={{ marginLeft: '30px' }}>
+            <div style={{ margin: '30px' }}>
+                <SmButton type='warning' disabled>danger</SmButton>
+                <SmSelect style={{ width: 200 }}
+                    onChange={this.hangleSelectChange}
+                    options={this.state.options}
+                    defaultValue={4}
+                    showSearch
+                    disabled>
+                </SmSelect>
                 {/* <SmButton type='danger' onClick={this.hangleClick} style={{ marginBottom: 10, marginRight: 20 }}>按钮</SmButton>
                 <br/>
                 <SmInput style={{ width: '180px' }}
@@ -123,6 +131,7 @@ export default class App extends React.Component {
                     {/* <SmRadio onClick={this.handleCheckChange} defaultChecked={this.state.defaultChecked}><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio> */}
                 </div>
                 <SmTable dataSource={this.state.dataSource}
+                    height
                     rowSelect onChange={this.handleTableChange}>
                     <Column title='姓名' dataIndex='name' render={(row, index) => {
                         return (

@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-15 15:04:58
+ * @LastEditTime: 2019-10-17 18:27:11
  */
 
 import React, { Component } from 'react';
@@ -20,28 +20,37 @@ export default class Select extends Component {
             showListData: this.props.options,
             label: '',
             value: this.props.defaultValue ? this.props.defaultValue : '',
-            count: 0
-
+            count: 0,
+            aniClass: false // 动画的class
         }
     }
 
-    handleOnClick = (v) => {
+    handleOnClick = (e, v) => {
+        e.stopPropagation();
         this.setState({
             label: v.label,
             value: v.value,
-            showList: false,
+            aniClass: true,
             showListData: this.props.options
         }, () => {
+            setTimeout(() => {
+                this.setState({
+                    showList: false,
+                    aniClass: false,
+                })
+            }, 750)
             try{
                 this.props.onChange(v)
             }
             catch{
-                console.error("error")
+                console.error("请绑定一个onChange事件")
             }
         })
     }
 
-    handleInputOnClick = () => {
+    handleInputOnClick = (e) => {
+        e.stopPropagation();
+        if (this.props.disabled) return;
         this.setState({showList: true})
     }
 
@@ -59,29 +68,18 @@ export default class Select extends Component {
         }
     }
 
-
-    handleBlur = () => {
-        setTimeout(() => {
-            let filterLabel = this.props.options.filter(v => v.value === this.state.value)[0];
-            let label = filterLabel ? filterLabel.label : ''
-            this.setState({
-                showList: false,
-                label: label,
-                showListData: this.props.options,
-            });
-        }, 200);
-    }
-
     haveDataDom = () => {
         if (!this.state.showList) return;
         return (
-            <div className={['sm-select-list', 'slideUpIn'].join(' ')}
+            <div className={['sm-select-list', !this.state.aniClass ? 'aniShow' : 'aniHidden'].join(' ')}
                 style={this.state.showList ? {'display': 'block'} : {'display': 'none'}}>
-                <ul>
+                <ul onClick={(e) => e.stopPropagation()}>
                     { this.state.showListData.map((v, i) => {
                         return (
-                            <li key={i} onClick={() => this.handleOnClick(v)}
-                            className={this.state.value === v.value ? 'sm-select-checked' : null}>{v.label}</li>
+                            <li key={i} onClick={!v.disabled ? (e) => this.handleOnClick(e, v) : null }
+                            className={
+                                this.state.value === v.value ? 'sm-select-checked' : null,
+                                v.disabled ? 'sm-select-options-disabled' : null}>{v.label}</li>
                         )
                     }) }
                 </ul>
@@ -92,7 +90,7 @@ export default class Select extends Component {
     nodataDom = () => {
         if (!this.state.showList) return;
         return <div className='sm-select-nodata slideUpIn'>
-            <p>暂无数据</p>
+            <p><i className='iconfont icon-wushuju' style={{position: 'relative',color: 'black' }}></i><span>暂无数据</span></p>
         </div>
     }
 
@@ -108,15 +106,26 @@ export default class Select extends Component {
         return null;
     }
 
+    componentDidUpdate() {
+        window.addEventListener("click", () => {
+            let filterLabel = this.props.options.filter(v => v.value === this.state.value)[0];
+            let label = filterLabel ? filterLabel.label : ''
+            this.setState({
+                showList: false,
+                label: label,
+                showListData: this.props.options,
+            });
+        })
+    }
+
     render() {
         return (
-            <div className='sm-input-wrapper' style={this.props.style}>
-                <input type='text' className={['sm-input'].join(' ')}
+            <div className={['sm-input-wrapper', this.props.disabled ? 'sm-select-disabled' : null].join(' ')} style={this.props.style}>
+                <input type='text' className={['sm-input', this.props.disabled ? 'sm-select-disabled' : null].join(' ')}
                     onClick={this.handleInputOnClick}
-                    onBlur={this.handleBlur}
                     placeholder={this.props.placeholder}
                     value={this.state.label}
-                    readOnly={!this.props.showSearch}
+                    readOnly={!this.props.showSearch || this.props.disabled }
                     onChange={this.handleInputOnChange}
                     />
                 <i className={['iconfont icon-arrow-left', this.state.showList ? 'rotating' : ''].join(' ')}></i>
