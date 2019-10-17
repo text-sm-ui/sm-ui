@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:12:48
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 20:27:15
+ * @LastEditTime: 2019-10-17 23:09:22
  */
 import React, { Component } from 'react';
 
@@ -31,7 +31,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
     type: PropTypes.oneOf(['default', 'primary', 'danger', 'warning']),
-    disabled: PropTypes.oneOf([true, false]),
+    disabled: PropTypes.bool,
     onClick: PropTypes.func,
     style: PropTypes.object,
     children: PropTypes.string

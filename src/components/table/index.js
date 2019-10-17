@@ -4,7 +4,7 @@
  * @Author: lvjing
  * @Date: 2019-10-16 14:42:56
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 20:54:50
+ * @LastEditTime: 2019-10-17 22:26:55
  */
 
 
@@ -58,12 +58,12 @@ export default class Table extends Component {
     componentDidMount() {
         let px = this.refs.table.offsetTop + 60 + 'px';
         this.setState({
-            minHeight: this.props.height ? this.props.height : this.props.auto ? 'calc(100vh - '+ px +')' : this.props.height,
+            minHeight: this.props.height ? this.props.height : (this.props.auto ? 'calc(100vh - '+ px +')' : 240),
             tableWidth: this.refs.table.clientWidth
         })
         window.onresize = () => {
             this.setState({
-                minHeight: this.props.height ? this.props.height : this.props.auto ? 'calc(100vh - '+ px +')' : this.props.height,
+                minHeight: this.props.height ? this.props.height : (this.props.auto ? 'calc(100vh - '+ px +')' : 240),
                 tableWidth: this.refs.table.clientWidth
             })
         };
@@ -73,14 +73,14 @@ export default class Table extends Component {
         let px = this.refs.table.offsetTop + 60 + 'px';
         if (this.state.tableWidth === this.refs.table.clientWidth) return;
         this.setState({
-            minHeight: this.props.height ? this.props.height : this.props.auto ? 'calc(100vh - '+ px +')' : this.props.height ,
+            minHeight: this.props.height ? this.props.height : (this.props.auto ? 'calc(100vh - '+ px +')' : 240),
             tableWidth: this.refs.table.clientWidth
         })
     }
 
     render() {
         return (
-            <div ref='table' style={this.props.auto || this.props.height ? { minHeight: this.state.minHeight } : { borderBottom: 'none' }} 
+            <div ref='table' style={this.props.auto || this.props.height ? { minHeight: this.state.minHeight } : { minHeight: 240}} 
                 className='sm-table-wapper'>
                 <table className='sm-table' style={ this.props.style, { width: this.state.tableWidth }}>
                     <thead>
@@ -129,12 +129,12 @@ export default class Table extends Component {
 class Column extends Component{
     handleChild = () => {
         if (this.props.isTitle) {
-            return <td>{ this.props.title }</td>
+            return <td style={{ width: this.props.width }}>{ this.props.title }</td>
         } else {
             if (this.props.render) {
-                return <td>{ this.props.render(this.props.dataSource, this.props.index) }</td>
+                return <td style={{ width: this.props.width }}>{ this.props.render(this.props.dataSource, this.props.index) }</td>
             }
-            return <td>{ this.props.dataSource[this.props.dataIndex] }</td>
+            return <td style={{ width: this.props.width }}>{ this.props.dataSource[this.props.dataIndex] }</td>
         }
     }
     render() {
@@ -151,7 +151,8 @@ Table.propTypes = {
     auto: PropTypes.oneOf([true, false]),
     height: PropTypes.number,
     noDataText: PropTypes.string,
-    rowSelect: PropTypes.oneOf([true, false])
+    rowSelect: PropTypes.oneOf([true, false]),
+    width: PropTypes.oneOf([PropTypes.string, PropTypes.number])
 }
 
 Table.defaultProps = {

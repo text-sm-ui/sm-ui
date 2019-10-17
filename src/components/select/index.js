@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 20:00:12
+ * @LastEditTime: 2019-10-17 23:46:46
  */
 
 import React, { Component } from 'react';
@@ -77,10 +77,10 @@ export default class Select extends Component {
                     { this.state.showListData.map((v, i) => {
                         return (
                             <li key={i} onClick={!v.disabled ? (e) => this.handleOnClick(e, v) : null }
-                            className={
-                                // eslint-disable-next-line no-sequences
+                            className={[
                                 this.state.value === v.value ? 'sm-select-checked' : null,
-                                v.disabled ? 'sm-select-options-disabled' : null}>{v.label}</li>
+                                v.disabled ? 'sm-select-options-disabled' : null
+                            ].join(' ')}>{v.label}</li>
                         )
                     }) }
                 </ul>
@@ -113,8 +113,16 @@ export default class Select extends Component {
             let label = filterLabel ? filterLabel.label : ''
             this.setState({
                 showList: false,
-                label: label,
+                label: this.state.label === '' ? '' : label,
+                value: '',
                 showListData: this.props.options,
+            }, () => {
+                try {
+                    this.props.handleClearClick({ msg: '数据被清空', value: 1 })
+                }
+                catch {
+                    console.error("数据被清空，")
+                }
             });
         })
     }
@@ -129,7 +137,9 @@ export default class Select extends Component {
                     readOnly={!this.props.showSearch || this.props.disabled }
                     onChange={this.handleInputOnChange}
                     />
-                <i className={['iconfont icon-arrow-left', this.state.showList ? 'rotating' : ''].join(' ')}></i>
+                {
+                    this.state.value && this.props.allowClear ? <i className='iconfont icon-danseshixintubiao-'></i> : <i className={['iconfont icon-arrow-left', this.state.showList ? 'rotating' : ''].join(' ')}></i>
+                }
                 {
                     this.state.showListData.length > 0 ? this.haveDataDom() : this.nodataDom()
                 }
@@ -141,12 +151,17 @@ export default class Select extends Component {
 Select.propTypes = {
     placeholder: PropTypes.string,
     options: PropTypes.array,
-    showSearch: PropTypes.oneOf([true, false]),
-    onChange: PropTypes.func
+    showSearch: PropTypes.bool,
+    onChange: PropTypes.func,
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    style: PropTypes.object,
+    onClearChange: PropTypes.func,
+    allowClear: PropTypes.bool
 }
 
 Select.defaultProps = {
     placeholder: '请选择',
     showSearch: false,
-    options: []
+    options: [],
+    allowClear: false
 }

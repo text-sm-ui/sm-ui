@@ -3,11 +3,11 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 20:53:09
+ * @LastEditTime: 2019-10-17 23:44:46
  */
 import React from 'react';
 
-import { SmTable, SmButton, SmSelect } from './components';
+import { SmTable, SmButton, SmSelect, SmInput } from './components';
 
 const { Column } = SmTable
 
@@ -77,8 +77,17 @@ export default class App extends React.Component {
                     options={this.state.options}
                     defaultValue={4}
                     showSearch
-                    disabled>
+                    allowClear
+                    >
                 </SmSelect>
+                <SmInput style={{ width: '180px' }}
+                    type='password'
+                    onChange={this.handleChange}
+                    defaultValue={this.state.value}
+                    placeholder='请输入文字'
+                    omit
+                    allowClear>
+                </SmInput>
                 {/* <SmButton type='danger' onClick={this.hangleClick} style={{ marginBottom: 10, marginRight: 20 }}>按钮</SmButton>
                 <br/>
                 <SmInput style={{ width: '180px' }}
@@ -131,16 +140,21 @@ export default class App extends React.Component {
                     {/* <SmRadio onClick={this.handleCheckChange} defaultChecked={this.state.defaultChecked}><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio> */}
                 </div>
                 <SmTable dataSource={this.state.dataSource}
-                    height={300}
+                    // height={300}
                     rowSelect onChange={this.handleTableChange}>
                     <Column title='姓名' dataIndex='name' render={(row, index) => {
                         return (
                             <span>{ row.name + index }</span>
                         )
-                    }}>
+                    }}
+                    width={100}>
                     </Column>
                     <Column title='年龄' dataIndex='age'></Column>
                     <Column title='地址' dataIndex='address'></Column>
+                    <Column title='身份证' dataIndex='address'></Column>
+                    <Column title='婚姻关系' dataIndex='address'></Column>
+                    <Column title='恋爱关系' dataIndex='address'></Column>
+                    <Column title='是否生育' dataIndex='address'></Column>
                 </SmTable>
             </div>
         )
