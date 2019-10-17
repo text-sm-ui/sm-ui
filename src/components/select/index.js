@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 18:27:11
+ * @LastEditTime: 2019-10-17 20:00:12
  */
 
 import React, { Component } from 'react';
@@ -78,6 +78,7 @@ export default class Select extends Component {
                         return (
                             <li key={i} onClick={!v.disabled ? (e) => this.handleOnClick(e, v) : null }
                             className={
+                                // eslint-disable-next-line no-sequences
                                 this.state.value === v.value ? 'sm-select-checked' : null,
                                 v.disabled ? 'sm-select-options-disabled' : null}>{v.label}</li>
                         )
@@ -88,7 +89,7 @@ export default class Select extends Component {
     }
 
     nodataDom = () => {
-        if (!this.state.showList) return;
+        if (!this.state.showList) return
         return <div className='sm-select-nodata slideUpIn'>
             <p><i className='iconfont icon-wushuju' style={{position: 'relative',color: 'black' }}></i><span>暂无数据</span></p>
         </div>

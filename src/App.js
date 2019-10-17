@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 18:16:32
+ * @LastEditTime: 2019-10-17 20:53:09
  */
 import React from 'react';
 
@@ -131,7 +131,7 @@ export default class App extends React.Component {
                     {/* <SmRadio onClick={this.handleCheckChange} defaultChecked={this.state.defaultChecked}><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio> */}
                 </div>
                 <SmTable dataSource={this.state.dataSource}
-                    height
+                    height={300}
                     rowSelect onChange={this.handleTableChange}>
                     <Column title='姓名' dataIndex='name' render={(row, index) => {
                         return (

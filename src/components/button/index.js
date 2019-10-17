@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:12:48
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-14 17:18:38
+ * @LastEditTime: 2019-10-17 20:27:15
  */
 import React, { Component } from 'react';
 
@@ -26,10 +26,13 @@ export default class Button extends Component {
 
 Button.defaultProps = {
     type: 'default',
-    disabled: false
+    disabled: false,
 }
 
 Button.propTypes = {
     type: PropTypes.oneOf(['default', 'primary', 'danger', 'warning']),
     disabled: PropTypes.oneOf([true, false]),
+    onClick: PropTypes.func,
+    style: PropTypes.object,
+    children: PropTypes.string
 }

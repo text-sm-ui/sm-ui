@@ -1,9 +1,10 @@
+/* eslint-disable no-sequences */
 /*
  * @Descripttion:
  * @Author: lvjing
  * @Date: 2019-10-16 14:42:56
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 15:28:56
+ * @LastEditTime: 2019-10-17 20:54:50
  */
 
 
@@ -19,8 +20,7 @@ export default class Table extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            height: '',
-            minHeight: 'calc(100vh - 190px)',
+            minHeight: this.props.height,
             tableWidth: 0,
             dataSource: this.props.dataSource,
             checkedAll: false
@@ -58,14 +58,12 @@ export default class Table extends Component {
     componentDidMount() {
         let px = this.refs.table.offsetTop + 60 + 'px';
         this.setState({
-            height: window.innerHeight - this.refs.table.offsetTop - 80,
-            minHeight: 'calc(100vh - '+ px +')',
+            minHeight: this.props.height ? this.props.height : this.props.auto ? 'calc(100vh - '+ px +')' : this.props.height,
             tableWidth: this.refs.table.clientWidth
         })
         window.onresize = () => {
             this.setState({
-                height: window.innerHeight - this.refs.table.offsetTop - 80,
-                minHeight: 'calc(100vh - '+ px +')',
+                minHeight: this.props.height ? this.props.height : this.props.auto ? 'calc(100vh - '+ px +')' : this.props.height,
                 tableWidth: this.refs.table.clientWidth
             })
         };
@@ -75,19 +73,16 @@ export default class Table extends Component {
         let px = this.refs.table.offsetTop + 60 + 'px';
         if (this.state.tableWidth === this.refs.table.clientWidth) return;
         this.setState({
-            height: window.innerHeight - this.refs.table.offsetTop - 80,
-            minHeight: 'calc(100vh - '+ px +')',
+            minHeight: this.props.height ? this.props.height : this.props.auto ? 'calc(100vh - '+ px +')' : this.props.height ,
             tableWidth: this.refs.table.clientWidth
         })
     }
 
     render() {
         return (
-            <div ref='table' style={ this.props.height ? {
-                    minHeight: this.state.minHeight, background: 'white', border: '1px solid #e8eaec',
-                    borderTop: 'none', boxSizing:'border-box', width: '100%'
-                } : null}>
-                <table className='sm-table' style={{ width: this.state.tableWidth }} style={this.props.style}>
+            <div ref='table' style={this.props.auto || this.props.height ? { minHeight: this.state.minHeight } : { borderBottom: 'none' }} 
+                className='sm-table-wapper'>
+                <table className='sm-table' style={ this.props.style, { width: this.state.tableWidth }}>
                     <thead>
                         <tr>
                             {
@@ -105,7 +100,7 @@ export default class Table extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.state.dataSource.map((v, i) => {
+                            this.props.dataSource && this.props.dataSource.length !== 0 ? this.state.dataSource.map((v, i) => {
                                 return <tr key={i}>
                                     {
                                         this.hanndleSelect(v, i)
@@ -120,10 +115,11 @@ export default class Table extends Component {
                                         })
                                     }
                                 </tr>
-                            })
+                            }) : null
                         }
                     </tbody>
                 </table>
+                { !this.props.dataSource || this.props.dataSource.length === 0 ? <div className='sm-table-nodata'>{ this.props.noDataText }</div> : null }
             </div>
         )
     }
@@ -151,9 +147,16 @@ Table.Column = Column;
 
 
 Table.propTypes = {
-    data: PropTypes.array
+    data: PropTypes.array,
+    auto: PropTypes.oneOf([true, false]),
+    height: PropTypes.number,
+    noDataText: PropTypes.string,
+    rowSelect: PropTypes.oneOf([true, false])
 }
 
 Table.defaultProps = {
-    data: []
+    data: [],
+    auto: false,
+    noDataText: '暂无数据',
+    rowSelect: false
 }
