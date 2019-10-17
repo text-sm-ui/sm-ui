@@ -1,6 +1,6 @@
 {
-  "name": "ui-design-r",
-  "version": "0.0.6",
+  "name": "re-design",
+  "version": "0.0.7",
   "description": "A Design UI library for React",
   "main": "lib/index.js",
   "module": "esm/index.js",
