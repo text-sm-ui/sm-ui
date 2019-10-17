@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-16 14:42:56
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-16 18:45:45
+ * @LastEditTime: 2019-10-17 09:32:57
  */
 
 
@@ -14,7 +14,6 @@ import PropTypes from 'prop-types';
 import { SmCheckbox } from '../index'
 
 import './index.less';
-import { tsThisType } from '@babel/types';
 
 export default class Table extends Component {
     constructor(props) {
@@ -28,7 +27,10 @@ export default class Table extends Component {
         this.setState({
             dataSource: this.state.dataSource.map((c, d) => d === i ? {...c, checked: !c.checked} : {...c})
         }, () => {
-            this.props.onChange(this.state.dataSource.filter(f => f.checked), v, i, this.state.dataSource)
+            this.props.onChange(this.state.dataSource.filter(f => f.checked), v, i, this.state.dataSource);
+            this.setState({
+                checkedAll: this.state.dataSource.filter(f => f.checked).length === this.props.dataSource.length
+            })
         })
     }
 
@@ -36,12 +38,16 @@ export default class Table extends Component {
         this.setState({
             dataSource: this.state.dataSource.map(c => c.checked === this.state.checkedAll ? {...c, checked: !c.checked} : {...c}),
             checkedAll: !this.state.checkedAll
+        }, () => {
+            this.props.onChange(this.state.dataSource);
         })
     }
 
     hanndleSelect = (v, i, a) => {
         return this.props.rowSelect ?
             <td><SmCheckbox defaultChecked={ a ? this.state.checkedAll : v ? v.checked : false}
+                className={a ? 'sm-table-all' : ''}
+                disabled={!this.props.dataSource || this.props.dataSource.length === 0}
                 onClick={() => a ? this.handleCheckAll() : this.handlOnclickBox(v, i)}></SmCheckbox></td>
             : null
     }

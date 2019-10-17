@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-16 18:32:55
+ * @LastEditTime: 2019-10-17 09:32:13
  */
 import React from 'react';
 
@@ -63,9 +63,9 @@ export default class App extends React.Component {
 
     handleTableChange = (selected, v, i, data) => {
         console.log(selected, v, i, data);
-        this.setState({
-            dataSource: data
-        })
+        // this.setState({
+        //     dataSource: data
+        // })
     }
 
     render() {
