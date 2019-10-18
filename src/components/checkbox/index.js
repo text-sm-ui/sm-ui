@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-15 13:40:50
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-18 13:21:50
+ * @LastEditTime: 2019-10-18 16:34:53
  */
 import React, { Component } from 'react';
 
@@ -41,7 +41,7 @@ class Checkbox extends Component {
 
     render() {
         return(
-            <div style={{ overflow: 'hidden', display: 'inline-block' }}>
+            <div style={{ display: 'inline-block' }}>
                 <div className={['sm-checkbox', this.props.disabled ? 'sm-checkbox-disabled' : null].join(' ')}
                     style={this.props.style}>
                     <span

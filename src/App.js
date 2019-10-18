@@ -3,11 +3,11 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-18 16:21:41
+ * @LastEditTime: 2019-10-18 17:57:59
  */
 import React from 'react';
 
-import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio } from './components';
+import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage } from './components';
 
 const { Column } = SmTable
 
@@ -71,81 +71,90 @@ export default class App extends React.Component {
     handleRadioChange = (val) => {
         console.log(val)
     }
+    handleMessage = () => {
+        console.log(SmMessage.success())
+        // SmMessage.success('成功了没')
+    }
 
     render() {
         return (
             <div style={{ margin: '30px' }}>
-                <SmButton type='warning' disabled>danger</SmButton>
-                <SmSelect style={{ width: 200 }}
-                    onChange={this.hangleSelectChange}
-                    options={this.state.options}
-                    defaultValue={4}
-                    showSearch
-                    allowClear
-                    >
-                </SmSelect>
-                <SmInput style={{ width: '180px' }}
-                    type='password'
-                    onChange={this.handleChange}
-                    defaultValue={this.state.value}
-                    placeholder='请输入文字'
-                    omit
-                    allowClear>
-                </SmInput>
-                <br/>
-                <SmCheckbox onChange={this.handleCheckChange}
-                    defaultChecked>
-                    <span style={{ marginLeft: 12 }}>默认选择</span>
-                </SmCheckbox>
-                <SmCheckbox.Group onChange={this.handleCheckChange}
-                    >
-                    <SmCheckbox value={1}
+                {/* <div style={{ margin: '30px' }}>
+                    <SmButton type='warning' disabled>danger</SmButton>
+                    <SmSelect style={{ width: 200 }}
+                        onChange={this.hangleSelectChange}
+                        options={this.state.options}
+                        defaultValue={4}
+                        showSearch
+                        allowClear
                         >
-                        <span style={{ marginLeft: 12 }}>苹果</span>
-                    </SmCheckbox>
-                    <SmCheckbox value={2}
-                        style={{margin: '0 20px'}}
-                        >
-                        <span style={{ marginLeft: 12 }}>橘子</span>
-                    </SmCheckbox>
-                    <SmCheckbox value={3}
-                        >
-                        <span style={{ marginLeft: 12 }}>樱桃</span>
-                    </SmCheckbox>
-                </SmCheckbox.Group>
-                <SmCheckbox defaultChecked={this.state.defaultChecked}
-                    onClick={this.handleCheckChange}>
+                    </SmSelect>
+                    <SmInput style={{ width: '180px' }}
+                        type='password'
+                        onChange={this.handleChange}
+                        defaultValue={this.state.value}
+                        placeholder='请输入文字'
+                        omit
+                        allowClear>
+                    </SmInput>
+                    <br/>
+                    <SmCheckbox onChange={this.handleCheckChange}
+                        defaultChecked>
                         <span style={{ marginLeft: 12 }}>默认选择</span>
-                </SmCheckbox>
-                <br/>
+                    </SmCheckbox>
+                    <SmCheckbox.Group onChange={this.handleCheckChange}
+                        >
+                        <SmCheckbox value={1}
+                            >
+                            <span style={{ marginLeft: 12 }}>苹果</span>
+                        </SmCheckbox>
+                        <SmCheckbox value={2}
+                            style={{margin: '0 20px'}}
+                            >
+                            <span style={{ marginLeft: 12 }}>橘子</span>
+                        </SmCheckbox>
+                        <SmCheckbox value={3}
+                            >
+                            <span style={{ marginLeft: 12 }}>樱桃</span>
+                        </SmCheckbox>
+                    </SmCheckbox.Group>
+                    <SmCheckbox defaultChecked={this.state.defaultChecked}
+                        onClick={this.handleCheckChange}>
+                            <span style={{ marginLeft: 12 }}>默认选择</span>
+                    </SmCheckbox>
+                    <br/>
+                    <div>
+                        <SmRadio.Group
+                            onChange={this.handleRadioChange}
+                            defaultChecked={'2'}
+                        >
+                            <SmRadio value={1}><span style={{ padding: '0 10px' }}>苹果</span></SmRadio>
+                            <SmRadio value={'2'} style={{ margin: '0 20px' }}><span style={{ padding: '0 10px' }}>橘子</span></SmRadio>
+                            <SmRadio value={3} disabled><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio>
+                        </SmRadio.Group>
+                        <SmRadio onChange={this.handleCheckChange} defaultChecked={this.state.defaultChecked}><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio>
+                    </div>
+                    <SmTable dataSource={this.state.dataSource}
+                        height={300}
+                        rowSelect onChange={this.handleTableChange}>
+                        <Column title='姓名' dataIndex='name' render={(row, index) => {
+                            return (
+                                <span>{ row.name + index }</span>
+                            )
+                        }}
+                        width={100}>
+                        </Column>
+                        <Column title='年龄' dataIndex='age'></Column>
+                        <Column title='地址' dataIndex='address'></Column>
+                        <Column title='身份证' dataIndex='address'></Column>
+                        <Column title='婚姻关系' dataIndex='address'></Column>
+                        <Column title='恋爱关系' dataIndex='address'></Column>
+                        <Column title='是否生育' dataIndex='address'></Column>
+                    </SmTable>
+                </div> */}
                 <div>
-                    <SmRadio.Group
-                        onChange={this.handleRadioChange}
-                        defaultChecked={'2'}
-                    >
-                        <SmRadio value={1}><span style={{ padding: '0 10px' }}>苹果</span></SmRadio>
-                        <SmRadio value={'2'} style={{ margin: '0 20px' }}><span style={{ padding: '0 10px' }}>橘子</span></SmRadio>
-                        <SmRadio value={3} disabled><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio>
-                    </SmRadio.Group>
-                    {/* <SmRadio onChange={this.handleCheckChange} defaultChecked={this.state.defaultChecked}><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio> */}
+                    <SmButton type='danger' onClick={ this.handleMessage }>SmMessage</SmButton>
                 </div>
-                <SmTable dataSource={this.state.dataSource}
-                    // height={300}
-                    rowSelect onChange={this.handleTableChange}>
-                    <Column title='姓名' dataIndex='name' render={(row, index) => {
-                        return (
-                            <span>{ row.name + index }</span>
-                        )
-                    }}
-                    width={100}>
-                    </Column>
-                    <Column title='年龄' dataIndex='age'></Column>
-                    <Column title='地址' dataIndex='address'></Column>
-                    <Column title='身份证' dataIndex='address'></Column>
-                    <Column title='婚姻关系' dataIndex='address'></Column>
-                    <Column title='恋爱关系' dataIndex='address'></Column>
-                    <Column title='是否生育' dataIndex='address'></Column>
-                </SmTable>
             </div>
         )
     }
