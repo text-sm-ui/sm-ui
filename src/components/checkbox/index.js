@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-15 13:40:50
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-18 12:51:27
+ * @LastEditTime: 2019-10-18 13:21:50
  */
 import React, { Component } from 'react';
 
@@ -123,7 +123,6 @@ Checkbox.Prototype = {
     defaultChecked: PropTypes.oneOf([true, false]),
     type: PropTypes.oneOf(['primary', 'danger', 'warning']),
     onChange: PropTypes.func,
-    onClick: PropTypes.func,
     style: PropTypes.object,
     children: PropTypes.element
 }

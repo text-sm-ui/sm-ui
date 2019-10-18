@@ -3,11 +3,11 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-18 12:49:34
+ * @LastEditTime: 2019-10-18 16:21:41
  */
 import React from 'react';
 
-import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox } from './components';
+import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio } from './components';
 
 const { Column } = SmTable
 
@@ -68,6 +68,10 @@ export default class App extends React.Component {
         // })
     }
 
+    handleRadioChange = (val) => {
+        console.log(val)
+    }
+
     render() {
         return (
             <div style={{ margin: '30px' }}>
@@ -89,9 +93,10 @@ export default class App extends React.Component {
                     allowClear>
                 </SmInput>
                 <br/>
-                {/* <SmCheckbox onChange={this.handleCheckChange}>
+                <SmCheckbox onChange={this.handleCheckChange}
+                    defaultChecked>
                     <span style={{ marginLeft: 12 }}>默认选择</span>
-                </SmCheckbox> */}
+                </SmCheckbox>
                 <SmCheckbox.Group onChange={this.handleCheckChange}
                     >
                     <SmCheckbox value={1}
@@ -114,15 +119,15 @@ export default class App extends React.Component {
                 </SmCheckbox>
                 <br/>
                 <div>
-                    {/* <SmRadio.Group
-                        onChange={this.handleCheckChange}
-                        defaultSelect={this.state.defaultSelect}
+                    <SmRadio.Group
+                        onChange={this.handleRadioChange}
+                        defaultChecked={'2'}
                     >
                         <SmRadio value={1}><span style={{ padding: '0 10px' }}>苹果</span></SmRadio>
                         <SmRadio value={'2'} style={{ margin: '0 20px' }}><span style={{ padding: '0 10px' }}>橘子</span></SmRadio>
                         <SmRadio value={3} disabled><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio>
-                    </SmRadio.Group> */}
-                    {/* <SmRadio onClick={this.handleCheckChange} defaultChecked={this.state.defaultChecked}><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio> */}
+                    </SmRadio.Group>
+                    {/* <SmRadio onChange={this.handleCheckChange} defaultChecked={this.state.defaultChecked}><span style={{ padding: '0 10px' }}>樱桃</span></SmRadio> */}
                 </div>
                 <SmTable dataSource={this.state.dataSource}
                     // height={300}
