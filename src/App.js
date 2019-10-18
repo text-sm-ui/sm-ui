@@ -3,11 +3,11 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 23:44:46
+ * @LastEditTime: 2019-10-18 12:49:34
  */
 import React from 'react';
 
-import { SmTable, SmButton, SmSelect, SmInput } from './components';
+import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox } from './components';
 
 const { Column } = SmTable
 
@@ -88,26 +88,11 @@ export default class App extends React.Component {
                     omit
                     allowClear>
                 </SmInput>
-                {/* <SmButton type='danger' onClick={this.hangleClick} style={{ marginBottom: 10, marginRight: 20 }}>按钮</SmButton>
                 <br/>
-                <SmInput style={{ width: '180px' }}
-                    type='text'
-                    onChange={this.handleChange}
-                    defaultValue={this.state.value}
-                    placeholder='请输入文字'
-                    omit
-                    allowClear></SmInput>
-                <br/> */}
-                {/* <br/>
-                <SmSelect style={{ width: 180 }}
-                    onChange={this.hangleSelectChange}
-                    options={this.state.options}
-                    defaultValue={4}
-                    showSearch>
-                </SmSelect>
-                <br/> */}
-                <br/>
-                {/* <SmCheckbox.Group onChange={this.handleCheckChange}
+                {/* <SmCheckbox onChange={this.handleCheckChange}>
+                    <span style={{ marginLeft: 12 }}>默认选择</span>
+                </SmCheckbox> */}
+                <SmCheckbox.Group onChange={this.handleCheckChange}
                     >
                     <SmCheckbox value={1}
                         >
@@ -126,7 +111,7 @@ export default class App extends React.Component {
                 <SmCheckbox defaultChecked={this.state.defaultChecked}
                     onClick={this.handleCheckChange}>
                         <span style={{ marginLeft: 12 }}>默认选择</span>
-                </SmCheckbox> */}
+                </SmCheckbox>
                 <br/>
                 <div>
                     {/* <SmRadio.Group

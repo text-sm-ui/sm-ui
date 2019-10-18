@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-18 09:50:33
+ * @LastEditTime: 2019-10-18 10:54:39
  */
 
 import React, { Component } from 'react';
@@ -90,7 +90,7 @@ export default class Select extends Component {
 
     nodataDom = () => {
         if (!this.state.showList) return
-        return <div className='sm-select-nodata slideUpIn'>
+        return <div className='sm-select-nodata aniShow'>
             <p><i className='iconfont icon-wushuju' style={{position: 'relative',color: 'black' }}></i><span>暂无数据</span></p>
         </div>
     }

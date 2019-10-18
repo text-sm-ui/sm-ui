@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-15 13:40:50
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-16 17:42:38
+ * @LastEditTime: 2019-10-18 12:51:27
  */
 import React, { Component } from 'react';
 
@@ -15,23 +15,27 @@ class Checkbox extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            checked: false
+            checked: this.props.defaultChecked
         }
     }
     handleCheckboxClick = () => {
-        try{
-            if (this.props.group) {
-                this.setState({
-                    checked: !this.state.checked
-                },() => {
-                    this.props.onChange(this.props.value);
-                })
-            } else {
-                this.props.onClick();
-            }
-        }
-        catch{
-            this.props.onClick();
+        if (this.props.group) {
+            this.setState({
+                checked: !this.state.checked
+            },() => {
+                this.props.onChange(this.props.value);
+            })
+        } else {
+            this.setState({
+                checked: !this.state.checked
+            }, () => {
+                try{
+                    this.props.onChange(this.state.checked)
+                }
+                catch{
+                    console.error('这里可以绑定一个onChange事件')
+                }
+            })
         }
     }
 
@@ -43,11 +47,11 @@ class Checkbox extends Component {
                     <span
                     onClick={!this.props.disabled ? this.handleCheckboxClick : () => false}
                     className={['sm-checkbox-wapper',
-                    this.props.defaultChecked || this.state.checked ?  `sm-checkbox-checked-${this.props.type}` : '',
+                    this.state.checked ?  `sm-checkbox-checked-${this.props.type}` : '',
                     this.props.disabled ? 'sm-checkbox-disabled-span' : null].join(' ')}
                 >
                     {
-                        this.props.defaultChecked || this.state.checked ? <i className='iconfont icon-gouxuan-'></i> : null
+                        this.state.checked ? <i className='iconfont icon-gouxuan-'></i> : null
                     }
                 </span>
                     <div>
@@ -77,7 +81,7 @@ class Group extends Component {
                     this.props.onChange(this.state.checkedValues)
                 }
                 catch{
-                    console.error('error')
+                    console.error('这里可以绑定一个onChange事件')
                 }
             })
         } else {
@@ -118,7 +122,10 @@ export default Checkbox
 Checkbox.Prototype = {
     defaultChecked: PropTypes.oneOf([true, false]),
     type: PropTypes.oneOf(['primary', 'danger', 'warning']),
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onClick: PropTypes.func,
+    style: PropTypes.object,
+    children: PropTypes.element
 }
 
 Checkbox.defaultProps = {
