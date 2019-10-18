@@ -4,7 +4,7 @@
  * @Author: lvjing
  * @Date: 2019-10-16 14:42:56
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 22:26:55
+ * @LastEditTime: 2019-10-18 09:42:10
  */
 
 
@@ -48,7 +48,7 @@ export default class Table extends Component {
 
     hanndleSelect = (v, i, a) => {
         return this.props.rowSelect ?
-            <td><SmCheckbox defaultChecked={ a ? this.state.checkedAll : v ? v.checked : false}
+            <td style={{width: 60}}><SmCheckbox defaultChecked={ a ? this.state.checkedAll : v ? v.checked : false}
                 className={a ? 'sm-table-all' : ''}
                 disabled={!this.props.dataSource || this.props.dataSource.length === 0}
                 onClick={() => a ? this.handleCheckAll() : this.handlOnclickBox(v, i)}></SmCheckbox></td>
@@ -80,7 +80,7 @@ export default class Table extends Component {
 
     render() {
         return (
-            <div ref='table' style={this.props.auto || this.props.height ? { minHeight: this.state.minHeight } : { minHeight: 240}} 
+            <div ref='table' style={this.props.auto || this.props.height ? { minHeight: this.state.minHeight } : { minHeight: 240}}
                 className='sm-table-wapper'>
                 <table className='sm-table' style={ this.props.style, { width: this.state.tableWidth }}>
                     <thead>

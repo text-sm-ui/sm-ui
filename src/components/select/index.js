@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-17 23:46:46
+ * @LastEditTime: 2019-10-18 09:50:33
  */
 
 import React, { Component } from 'react';
@@ -107,23 +107,24 @@ export default class Select extends Component {
         return null;
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         window.addEventListener("click", () => {
-            let filterLabel = this.props.options.filter(v => v.value === this.state.value)[0];
-            let label = filterLabel ? filterLabel.label : ''
-            this.setState({
-                showList: false,
-                label: this.state.label === '' ? '' : label,
-                value: '',
-                showListData: this.props.options,
-            }, () => {
-                try {
-                    this.props.handleClearClick({ msg: '数据被清空', value: 1 })
-                }
-                catch {
-                    console.error("数据被清空，")
-                }
-            });
+            if (this.state.showList) {
+                let filterLabel = this.props.options.filter(v => v.value === this.state.value)[0];
+                let label = filterLabel ? filterLabel.label : '';
+                this.setState({
+                    showList: false,
+                    label: this.state.label === '' ? '' : label,
+                    showListData: this.props.options,
+                }, () => {
+                    try {
+                        this.props.handleClearClick({ msg: '数据被清空', value: 1 })
+                    }
+                    catch {
+                        console.error("数据被清空")
+                    }
+                });
+            }
         })
     }
 
