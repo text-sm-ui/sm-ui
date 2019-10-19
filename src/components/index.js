@@ -1,7 +1,7 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 12:55:31
- * @LastEditTime: 2019-10-18 17:38:09
+ * @LastEditTime: 2019-10-18 22:41:41
  * @LastEditors: lvjing
  * @Description:
  */
@@ -18,3 +18,5 @@ export { default as SmRadio } from './radio';
 export { default as SmTable } from './table';
 
 export { default as SmMessage } from './message';
+
+export { default as SmNotice } from './notice';

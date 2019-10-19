@@ -1,0 +1,82 @@
+
+.sm-notice-wapper{
+    position: fixed;
+    right: 0;
+    top: 30px;
+    margin-bottom: 10px;
+    width: 335px;
+    margin-right: 20px;
+}
+.sm-notice{
+    padding: 16px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    position: relative;
+    display: inline-block;
+    .iconfont{
+        margin-right: 7px;
+        position: relative;
+        top: 1px;
+        font-size: 30px;
+    }
+    .sm-notice-title{
+        font-size: 16px;
+        line-height: 19px;
+        color: #17233d;
+        padding-right: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .icon-chenggong{
+        color: #42b983;
+    }
+    .icon-shibai{
+        color: #ed4014;
+    }
+    .icon-jinggao{
+        color: #f90;
+    }
+    .icon-info1{
+        color: rgb(45, 140, 240);
+    }
+    .icon-guanbi{
+        font-size: 12px;
+        color: #999;
+        cursor: pointer;
+    }
+}
+
+@keyframes aniRightIn {
+    0% {
+        opacity: 0;
+        transform-origin: 0 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 0 0;
+        transform: translateX(0%);
+    }
+}
+
+.aniRightIn{
+    animation: aniRightIn 0.7s forwards;
+}
+
+@keyframes aniRightOut{
+    0% {
+        transform-origin: 0 0;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    100% {
+        transform-origin: 0 0;
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+.aniRightOut{
+    animation: aniRightOut 0.7s forwards;
+}

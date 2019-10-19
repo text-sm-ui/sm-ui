@@ -1,5 +1,11 @@
 
-.sm-message-success{
+.sm-message-wapper{
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+}
+.sm-message{
     padding: 8px 16px;
     border-radius: 4px;
     box-shadow: 0 1px 6px rgba(0,0,0,.2);
@@ -19,4 +25,44 @@
     .icon-jinggao{
         color: #f90;
     }
+    .icon-info1{
+        color: rgb(45, 140, 240);
+    }
+}
+
+@keyframes aniDown {
+    0% {
+        transform-origin: 0 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        top: 0;
+    }
+    100% {
+        transform-origin: 0 0;
+        transform: translateY(0%);
+        opacity: 1;
+        top: 30px;
+    }
+}
+
+.aniDown{
+    animation: aniDown 0.7s forwards;
+}
+
+@keyframes aniToptOut{
+    0% {
+        transform-origin: 0 0;
+        transform: translateY(0%);
+        opacity: 1;
+        top: 30px;
+    }
+    100% {
+        transform-origin: 0 0;
+        transform: translateY(0%);
+        opacity: 0;
+        top: 0;
+    }
+}
+.aniToptOut{
+    animation: aniToptOut 0.7s forwards;
 }

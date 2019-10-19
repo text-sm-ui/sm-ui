@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-18 16:49:03
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-18 18:11:48
+ * @LastEditTime: 2019-10-19 21:46:22
  */
 import React, { Component } from 'react';
 
@@ -17,7 +17,8 @@ class Message extends Component{
     constructor(props){
         super(props)
         this.state = {
-            time: 3
+            time: this.props.time ? this.props.time : 3,
+            returnNull: false
         }
     }
 
@@ -29,38 +30,62 @@ class Message extends Component{
         }, this.state.time * 1000)
     }
 
+    componentDidUpdate() {
+        if (!this.state.time && !this.state.returnNull) {
+            setTimeout(() => {
+                this.setState({
+                    returnNull: true
+                })
+            }, 750)
+        }
+    }
+
     componentDidMount() {
         this.handleRemoveDom();
     }
     render() {
         return (
-            !this.state.time ? null : (
-                <div>
-                    <div className='sm-message-success'>
-                        <i className='iconfont icon-chenggong'></i>
-                        这是一条成功的消息
-                    </div>
-                    <div className='sm-message-success'>
-                        <i className='iconfont icon-shibai'></i>
-                        这是一条失败的消息
-                    </div>
-                    <div className='sm-message-success'>
-                        <i className='iconfont icon-jinggao'></i>
-                        这是一条警告的消息
-                    </div>
-                </div>
-            )
+            !this.state.returnNull ? <div className='sm-message-wapper'>
+                                    <div className={['sm-message', this.state.time ? 'aniDown' : 'aniToptOut'].join(' ')} >
+                                        <i className={['iconfont', this.props.className].join(' ')}></i>
+                                        { this.props.text }
+                                    </div>
+                                </div> 
+            : null
         )
     }
 }
 
 
 
-Message.success = (content) => {
-    console.log(content);
+Message.success = (content, time) => {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    ReactDOM.render(React.createElement(Message), div);
+    ReactDOM.render(React.createElement(Message, { text: content, time: time, className: 'icon-chenggong' }), div);
+}
+
+Message.error = (content, time) => {
+    let div = document.createElement('div');
+    document.body.appendChild(div);
+    ReactDOM.render(React.createElement(Message, { text: content, time: time, className: 'icon-shibai' }), div);
+}
+
+Message.warning = (content, time) => {
+    let div = document.createElement('div');
+    document.body.appendChild(div);
+    ReactDOM.render(React.createElement(Message, { text: content, time: time, className: 'icon-jinggao' }), div);
+}
+
+Message.info = (content, time) => {
+    let div = document.createElement('div');
+    document.body.appendChild(div);
+    ReactDOM.render(React.createElement(Message, { text: content, time: time, className: 'icon-info1' }), div);
 }
 
 export default Message;
+
+Message.propTypes = {
+    content: PropTypes.string,
+    time: PropTypes.number
+}
+

@@ -3,11 +3,11 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-18 17:57:59
+ * @LastEditTime: 2019-10-18 22:37:52
  */
 import React from 'react';
 
-import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage } from './components';
+import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage, SmNotice } from './components';
 
 const { Column } = SmTable
 
@@ -72,14 +72,17 @@ export default class App extends React.Component {
         console.log(val)
     }
     handleMessage = () => {
-        console.log(SmMessage.success())
+        SmMessage.warning('成功了没');
         // SmMessage.success('成功了没')
+    }
+    handleNotice = () => {
+        SmNotice.success("这是notice")
     }
 
     render() {
         return (
             <div style={{ margin: '30px' }}>
-                {/* <div style={{ margin: '30px' }}>
+                <div style={{ margin: '30px' }}>
                     <SmButton type='warning' disabled>danger</SmButton>
                     <SmSelect style={{ width: 200 }}
                         onChange={this.hangleSelectChange}
@@ -151,9 +154,10 @@ export default class App extends React.Component {
                         <Column title='恋爱关系' dataIndex='address'></Column>
                         <Column title='是否生育' dataIndex='address'></Column>
                     </SmTable>
-                </div> */}
+                </div>
                 <div>
                     <SmButton type='danger' onClick={ this.handleMessage }>SmMessage</SmButton>
+                    <SmButton type='primary' onClick={ this.handleNotice }>SmNotice</SmButton>
                 </div>
             </div>
         )
