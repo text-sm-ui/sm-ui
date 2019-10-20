@@ -1,7 +1,7 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 12:55:31
- * @LastEditTime: 2019-10-18 22:41:41
+ * @LastEditTime: 2019-10-19 22:04:19
  * @LastEditors: lvjing
  * @Description:
  */
@@ -20,3 +20,5 @@ export { default as SmTable } from './table';
 export { default as SmMessage } from './message';
 
 export { default as SmNotice } from './notice';
+
+export { default as SmModal } from './modal';

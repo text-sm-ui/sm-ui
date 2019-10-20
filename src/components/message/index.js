@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-18 16:49:03
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-19 21:46:22
+ * @LastEditTime: 2019-10-19 21:59:41
  */
 import React, { Component } from 'react';
 
@@ -58,34 +58,34 @@ class Message extends Component{
 
 
 
-Message.success = (content, time) => {
+Message.success = (text, time) => {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    ReactDOM.render(React.createElement(Message, { text: content, time: time, className: 'icon-chenggong' }), div);
+    ReactDOM.render(React.createElement(Message, { text: text, time: time, className: 'icon-chenggong' }), div);
 }
 
-Message.error = (content, time) => {
+Message.error = (text, time) => {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    ReactDOM.render(React.createElement(Message, { text: content, time: time, className: 'icon-shibai' }), div);
+    ReactDOM.render(React.createElement(Message, { text: text, time: time, className: 'icon-shibai' }), div);
 }
 
-Message.warning = (content, time) => {
+Message.warning = (text, time) => {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    ReactDOM.render(React.createElement(Message, { text: content, time: time, className: 'icon-jinggao' }), div);
+    ReactDOM.render(React.createElement(Message, { text: text, time: time, className: 'icon-jinggao' }), div);
 }
 
-Message.info = (content, time) => {
+Message.info = (text, time) => {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    ReactDOM.render(React.createElement(Message, { text: content, time: time, className: 'icon-info1' }), div);
+    ReactDOM.render(React.createElement(Message, { text: text, time: time, className: 'icon-info1' }), div);
 }
 
 export default Message;
 
 Message.propTypes = {
-    content: PropTypes.string,
+    text: PropTypes.string,
     time: PropTypes.number
 }
 

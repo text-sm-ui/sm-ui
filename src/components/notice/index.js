@@ -2,7 +2,7 @@
  * @Description: notice 组件
  * @Author: lvjing
  * @Date: 2019-10-18 22:34:32
- * @LastEditTime: 2019-10-19 21:43:52
+ * @LastEditTime: 2019-10-19 22:00:43
  * @LastEditors: lvjing
  */
 import React, { Component } from 'react';
@@ -71,33 +71,33 @@ class Notice extends Component{
 }
 
 
-Notice.success = (content, time) => {
+Notice.success = (text, time) => {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    ReactDOM.render(React.createElement(Notice, { text: content, time: time, className: 'icon-chenggong' }), div);
+    ReactDOM.render(React.createElement(Notice, { text: text, time: time, className: 'icon-chenggong' }), div);
 }
 
-Notice.error = (content, time) => {
+Notice.error = (text, time) => {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    ReactDOM.render(React.createElement(Notice, { text: content, time: time, className: 'icon-shibai' }), div);
+    ReactDOM.render(React.createElement(Notice, { text: text, time: time, className: 'icon-shibai' }), div);
 }
 
-Notice.warning = (content, time) => {
+Notice.warning = (text, time) => {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    ReactDOM.render(React.createElement(Notice, { text: content, time: time, className: 'icon-jinggao' }), div);
+    ReactDOM.render(React.createElement(Notice, { text: text, time: time, className: 'icon-jinggao' }), div);
 }
 
-Notice.info = (content, time) => {
+Notice.info = (text, time) => {
     let div = document.createElement('div');
     document.body.appendChild(div);
-    ReactDOM.render(React.createElement(Notice, { text: content, time: time, className: 'icon-info1' }), div);
+    ReactDOM.render(React.createElement(Notice, { text: text, time: time, className: 'icon-info1' }), div);
 }
 
 export default Notice;
 
 Notice.propTypes = {
-    content: PropTypes.string,
+    text: PropTypes.string,
     time: PropTypes.number
 }
