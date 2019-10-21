@@ -1,7 +1,7 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 12:55:31
- * @LastEditTime: 2019-10-19 22:04:19
+ * @LastEditTime: 2019-10-21 11:11:09
  * @LastEditors: lvjing
  * @Description:
  */
@@ -22,3 +22,5 @@ export { default as SmMessage } from './message';
 export { default as SmNotice } from './notice';
 
 export { default as SmModal } from './modal';
+
+export { default as SmDatePicker } from './datePicker';

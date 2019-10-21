@@ -3,12 +3,12 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-21 10:59:00
+ * @LastEditTime: 2019-10-21 13:33:19
  */
 import React from 'react';
 
 import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage, SmNotice,
-    SmModal } from './components';
+    SmModal, SmDatePicker } from './components';
 
 const { Column } = SmTable
 
@@ -89,7 +89,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div style={{ margin: '30px' }}>
+            <div style={{ margin: '30px', padding: 20}}>
                 <div style={{ margin: '30px' }}>
                     <SmButton type='warning' disabled>danger</SmButton>
                     <SmSelect style={{ width: 200 }}
@@ -187,6 +187,7 @@ export default class App extends React.Component {
                     <p>对话框内容</p>
                     <p>对话框内容</p>
                 </SmModal>
+                <SmDatePicker></SmDatePicker>
             </div>
         )
     }
