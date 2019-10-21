@@ -3,11 +3,12 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-18 22:37:52
+ * @LastEditTime: 2019-10-21 10:59:00
  */
 import React from 'react';
 
-import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage, SmNotice } from './components';
+import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage, SmNotice,
+    SmModal } from './components';
 
 const { Column } = SmTable
 
@@ -37,7 +38,8 @@ export default class App extends React.Component {
                   address: '西湖区湖底公园9999号',
                   checked: true
                 },
-            ]
+            ],
+            visibility: false
         }
     }
     hangleClick = () => {
@@ -77,6 +79,12 @@ export default class App extends React.Component {
     }
     handleNotice = () => {
         SmNotice.success("这是notice")
+    }
+
+    handleModal = () => {
+        this.setState({
+            visibility: !this.state.visibility
+        })
     }
 
     render() {
@@ -159,6 +167,26 @@ export default class App extends React.Component {
                     <SmButton type='danger' onClick={ this.handleMessage }>SmMessage</SmButton>
                     <SmButton type='primary' onClick={ this.handleNotice }>SmNotice</SmButton>
                 </div>
+                <div>
+                    <SmButton type='primary' onClick={ this.handleModal }>SmModal</SmButton>
+                </div>
+                <SmModal
+                    visible={this.state.visibility}
+                    title={
+                        <span>可以自定义标题， render</span>
+                    }
+                    // footer={
+                    //     <span>自定义footer</span>
+                    // }
+                    cancelText="cancel"
+                    onText='ok'
+                    handleCancel={() => this.setState({visibility: false})}
+                    handleOk={() => this.setState({visibility: false})}
+                >
+                    <p>对话框内容</p>
+                    <p>对话框内容</p>
+                    <p>对话框内容</p>
+                </SmModal>
             </div>
         )
     }

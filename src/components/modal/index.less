@@ -1,1 +1,69 @@
 @import '../styles/index.less';
+
+.sm-modal-background{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    .sm-modal-content{
+        position: absolute;
+        background: white;
+        border-radius: 4px;
+        left: 50%;
+        top: 15%;
+        .sm-modal-header{
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 16px;
+            border-bottom: 1px solid #e8eaec;
+            .icon-guanbi{
+                color: #999;
+                font-size: 12px;
+                cursor: pointer;
+            }
+        }
+        .sm-modal-body{
+            padding: 14px 16px;
+
+            font-size: 14px;
+            color: #515a6e;
+        }
+        .sm-modal-footer{
+            border-top: 1px solid #e8eaec;
+            padding: 12px 18px;
+        }
+    }
+}
+
+@keyframes smEaseIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translate(-50%, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translate(-50%, 0);
+    }
+}
+
+@keyframes smEaseOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) translate(-50%, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.9) translate(-50%, 0);
+    }
+}
+
+.smEaseIn{
+    animation: smEaseIn 0.7s forwards;
+}
+.smEaseOut{
+    animation: smEaseOut 0.5s forwards;
+}
