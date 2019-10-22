@@ -1,0 +1,103 @@
+@import '../styles/index.less';
+.sm-page{
+    display: flex;
+    .sm-page-page-list{
+        display: flex;
+        align-items: center;
+        .icon-arrow-right,
+        .icon-arrow-right1,
+        {
+            color: #666;
+        }
+        span{
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            border: 1px solid #dcdee2;
+            border-radius: 4px;
+            color: #515a6e;
+            cursor: pointer;
+            margin: 0 2px;
+        }
+        span:hover{
+            border-color: @primary;
+            color: @primary;
+            i{
+                color: @primary;
+            }
+        }
+        .sm-page-page-next{
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            cursor: pointer;
+            display: none;
+        }
+        .sm-page-page-next:hover{
+            display: none;
+        }
+        .sm-page-page-next::after{
+            content: "\2022\2022\2022";
+            display: block;
+            letter-spacing: 1px;
+            color: #ccc;
+            text-align: center;
+        }
+        .icon-double-arrow-left1{
+            color: @primary;
+            cursor: pointer;
+            font-size: 12px;
+            margin: 0 10px;
+        }
+    }
+    .sm-page-pageSize{
+        height: 26px;
+        border: 1px solid #dcdee2;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 20px;
+        line-height: 26px;
+        text-align: center;
+        color: #515a6e;
+        padding: 0 7px;
+        position: relative;
+        .sm-page-pageSize-list{
+            position: absolute;
+            top: 28px;
+            left: 0px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 4px;
+            box-shadow: 0 1px 6px rgba(0,0,0,.2);
+            background: white;
+            z-index: 100;
+            padding: 5px 0;
+        }
+        .sm-page-pageSize-list{
+            li{
+                padding: 2px 0;
+            }
+            li:hover{
+                background: #f3f3f3;
+            }
+            .sm-page-pageSize-checked{
+                background: #f3f3f3;
+                color: @primary;
+            }
+        }
+    }
+    .sm-page-elevator{
+        margin-left: 15px;
+        line-height: 26px;
+        display: flex;
+        flex-wrap: nowrap;
+        input{
+            height: 28px;
+            min-height: 28px;
+            width: 40px;
+        }
+    }
+}

@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-18 10:54:39
+ * @LastEditTime: 2019-10-22 17:47:24
  */
 
 import React, { Component } from 'react';
@@ -38,7 +38,7 @@ export default class Select extends Component {
                     showList: false,
                     aniClass: false,
                 })
-            }, 750)
+            }, 700)
             try{
                 this.props.onChange(v)
             }
