@@ -1,13 +1,20 @@
 @import '../styles/index.less';
 .sm-page{
     display: flex;
+    .sm-page-total{
+        line-height: 28px;
+        margin-right: 7px;
+    }
     .sm-page-page-list{
         display: flex;
         align-items: center;
         .icon-arrow-right,
-        .icon-arrow-right1,
-        {
+        .icon-arrow-right1{
             color: #666;
+        }
+        .sm-page-page-checked{
+            color: @primary;
+            border-color: @primary;
         }
         span{
             display: inline-block;
@@ -28,29 +35,36 @@
                 color: @primary;
             }
         }
-        .sm-page-page-next{
-            display: inline-block;
-            width: 26px;
-            height: 26px;
-            line-height: 26px;
-            cursor: pointer;
-            display: none;
+        .sm-page-page-next-wapper{
+            .sm-page-page-next{
+                display: inline-block;
+                width: 26px;
+                height: 26px;
+                line-height: 26px;
+                cursor: pointer;
+            }
+            .sm-page-page-next::after{
+                content: "\2022\2022\2022";
+                display: block;
+                letter-spacing: 1px;
+                color: #ccc;
+                text-align: center;
+            }
+            .icon-double-arrow-left1{
+                color: @primary;
+                cursor: pointer;
+                font-size: 12px;
+                margin: 0 7px;
+                display: none;
+            }
         }
-        .sm-page-page-next:hover{
-            display: none;
-        }
-        .sm-page-page-next::after{
-            content: "\2022\2022\2022";
-            display: block;
-            letter-spacing: 1px;
-            color: #ccc;
-            text-align: center;
-        }
-        .icon-double-arrow-left1{
-            color: @primary;
-            cursor: pointer;
-            font-size: 12px;
-            margin: 0 10px;
+        .sm-page-page-next-wapper:hover{
+            .sm-page-page-next{
+                display: none;
+            }
+            .icon-double-arrow-left1{
+                display: block;
+            }
         }
     }
     .sm-page-pageSize{
@@ -58,7 +72,7 @@
         border: 1px solid #dcdee2;
         border-radius: 4px;
         cursor: pointer;
-        margin-left: 20px;
+        margin-left: 15px;
         line-height: 26px;
         text-align: center;
         color: #515a6e;
@@ -89,6 +103,13 @@
             }
         }
     }
+    .sm-page-pageSize:hover{
+        border-color: @primary;
+    }
+    .sm-page-pageSize-focus{
+        border-color: @primary;
+        box-shadow: @primaryShadow;
+    }
     .sm-page-elevator{
         margin-left: 15px;
         line-height: 26px;
@@ -97,7 +118,42 @@
         input{
             height: 28px;
             min-height: 28px;
-            width: 40px;
+            width: 46px;
         }
+    }
+}
+
+@keyframes aniMoveUpIn {
+    0% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleY(.8);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleY(1);
+    }
+}
+.aniMoveUpIn{
+    animation: aniMoveUpIn 1s forwards;
+    display: block;
+}
+
+.aniMoveUpOut{
+    animation: aniMoveUpOut 1s forwards;
+    display: block;
+}
+
+@keyframes aniMoveUpOut {
+    0% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleY(.8);
     }
 }
