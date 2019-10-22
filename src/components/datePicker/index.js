@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-21 11:09:47
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-21 16:29:20
+ * @LastEditTime: 2019-10-22 09:57:40
  */
 import React, { Component } from 'react';
 
@@ -27,6 +27,8 @@ export default class DatePicker extends Component {
             next_month_array: [],
             choosed: '', // 当前点击的时间
             chooseType: 0, // 选择类型 2 年 1 月 0 天
+
+            year_arr: []
         }
     }
 
@@ -50,7 +52,9 @@ export default class DatePicker extends Component {
                 dd: preDays - i
             })
         }
-        pre_arr.sort();
+        pre_arr.sort((a, b) => {
+            return a.dd - b.dd
+        });
 
         let _arr = []
         for(let i = 1; i < days + 1; i++){
@@ -61,7 +65,7 @@ export default class DatePicker extends Component {
         }
 
         let next_arr = []
-        let c = 35 - _arr.length - pre_arr.length
+        let c = 42 - _arr.length - pre_arr.length
         for (let i = 1; i < c + 1; i++) {
             next_arr.push({
                 class: 2,
@@ -105,13 +109,29 @@ export default class DatePicker extends Component {
     }
 
     handleNextYear = () => {
-        let { yy, mm, dd } = this.state;
-        this.init(yy + 1, mm, dd)
+        let { yy, mm, dd, chooseType } = this.state;
+        if (chooseType === 0) {
+            this.init(yy + 1, mm, dd)
+        } else if (chooseType === 2) {
+            this.setState({
+                yy: yy + 10
+            }, () => {
+                this.handleChooseYear()
+            })
+        }
     }
 
     handlePreYear = () => {
-        let { yy, mm, dd } = this.state;
-        this.init(yy - 1, mm, dd)
+        let { yy, mm, dd, chooseType } = this.state;
+        if (chooseType === 0) {
+            this.init(yy - 1, mm, dd)
+        } else if (chooseType === 2) {
+            this.setState({
+                yy: yy - 10
+            }, () => {
+                this.handleChooseYear()
+            })
+        }
     }
 
     handleCurrent = (v) => {
@@ -126,10 +146,52 @@ export default class DatePicker extends Component {
         return (Array(n).join(0) + dd).slice(-n);
     }
 
+    // 跳转选择年
+    handleChooseYear = () => {
+        const { yy } = this.state;
+        let parseIntNum = parseInt(yy / 10);
+        let _arr = [];
+        for (let i = 0; i < 10; i++) {
+            _arr.push((parseIntNum * 10) + i)
+        }
+        this.setState({
+            year_arr: _arr,
+            chooseType: 2
+        })
+    }
+
+    // 选择具体的年
+    hanldeChooseDetailYear = (v) => {
+        this.setState({
+            yy: v,
+            chooseType: 0
+        }, () => {
+            let { yy, mm, dd } = this.state;
+            this.init(yy, mm, dd)
+        })
+    }
+
+    // 选择月份
+    handleChooseMonth = () => {
+        this.setState({
+            chooseType: 1
+        })
+    }
+    hanldeChooseDetailMonth = (v) => {
+        this.setState({
+            mm: v.value,
+            chooseType: 0
+        }, () => {
+            let { yy, mm, dd } = this.state;
+            this.init(yy, mm, dd)
+        })
+    }
+
     handleYYorMMorDay = () => {
-        const { mm, days, dd, choosed, chooseType } = this.state;
+        const { mm, days, dd, choosed, chooseType, yy, year_arr } = this.state;
         let date = new Date();
         let current_mm = date.getMonth();
+        let current_yy = date.getFullYear();
         if ( chooseType === 0) {
             return (
                 <div>
@@ -145,7 +207,7 @@ export default class DatePicker extends Component {
                             days.map((v, i) => {
                                 return <span key={i} onClick={() => this.handleCurrent(v) }
                                     className={['sm-datePicker-detail',
-                                    dd === v.dd && current_mm === mm ? 'sm-datePicker-current' : null,
+                                    dd === v.dd && current_mm === mm  && current_yy === yy ? 'sm-datePicker-current' : null,
                                     v.choose || (v.class === choosed.class && v.dd === choosed.dd && current_mm === mm) ? 'sm-datePicker-choosed' : null]. join(' ')}
                                     style={v.class === 1 ? {color: '#515a6e'}: null}>{ v.dd }</span>
                             })
@@ -157,16 +219,25 @@ export default class DatePicker extends Component {
             return (
                 <div>
                     <div className='sm-datePicker-cells sm-choose-yy'>
-                        <span className='sm-datePicker-yy'>2010</span>
-                        <span className='sm-datePicker-yy'>2010</span>
-                        <span className='sm-datePicker-yy'>2010</span>
-                        <span className='sm-datePicker-yy'>2010</span>
-                        <span className='sm-datePicker-yy'>2010</span>
-                        <span className='sm-datePicker-yy'>2010</span>
-                        <span className='sm-datePicker-yy'>2010</span>
-                        <span className='sm-datePicker-yy'>2010</span>
-                        <span className='sm-datePicker-yy'>2010</span>
-                        <span className='sm-datePicker-yy'>2010</span>
+                        {
+                            year_arr.map((v, i) => {
+                                return <span className='sm-datePicker-yy' onClick={() => this.hanldeChooseDetailYear(v)}
+                                    style={ current_yy < v || current_yy === v  ? { color: '#515a6e'} : null } key={i}>{ v }</span>
+                            })
+                        }
+                    </div>
+                </div>
+            )
+        } else if (chooseType === 1) {
+            return (
+                <div>
+                    <div className='sm-datePicker-cells sm-choose-yy'>
+                        {
+                            month_list.map((v, i) => {
+                                return <span className='sm-datePicker-month' key={i}
+                                onClick={() => this.hanldeChooseDetailMonth(v)}>{ v.name }</span>
+                            })
+                        }
                     </div>
                 </div>
             )
@@ -174,19 +245,25 @@ export default class DatePicker extends Component {
     }
 
     render() {
-        const { yy, mm } = this.state;
+        const { yy, mm, chooseType } = this.state;
         return (
             <div style={{ width: 220, position: 'relative' }}>
                 <input type='text' className='sm-datePicker-input sm-input'/>
                 <div className='sm-datePicker-list'>
                     <div className='sm-datePicker-header'>
                         <i className='iconfont icon-double-arrow-left' onClick={this.handlePreYear}></i>
-                        <i className='iconfont icon-arrow-right' onClick={this.handlePreMonth}></i>
+                        {
+                            chooseType === 0 ? <i className='iconfont icon-arrow-right' onClick={this.handlePreMonth}></i> : null
+                        }
                         <p>
-                            <span onClick={() => this.setState({chooseType: 2})}>{ yy }年</span>
-                            <span onClick={() => this.setState({chooseType: 1})}>{ mm + 1 }月</span>
+                            <span onClick={this.handleChooseYear}>{ yy }年</span>
+                            {
+                                chooseType === 2 ? null : <span onClick={ this.handleChooseMonth }>{ mm + 1 }月</span>
+                            }
                         </p>
-                        <i className='iconfont icon-arrow-right1' onClick={this.handleNextMonth}></i>
+                        {
+                            chooseType === 0 ? <i className='iconfont icon-arrow-right1' onClick={this.handleNextMonth}></i> : null
+                        }
                         <i className='iconfont icon-double-arrow-left1' onClick={this.handleNextYear}></i>
                     </div>
                     <div className='sm-datePicker-content'>
@@ -201,3 +278,17 @@ export default class DatePicker extends Component {
 }
 
 const week = ['日', '一', '二', '三', '四', '五', '六']
+const month_list = [
+    { name: '1月',value: 0 },
+    { name: '2月',value: 1 },
+    { name: '3月',value: 2 },
+    { name: '4月',value: 3 },
+    { name: '5月',value: 4 },
+    { name: '6月',value: 5 },
+    { name: '7月',value: 6 },
+    { name: '8月',value: 7 },
+    { name: '9月',value: 8 },
+    { name: '10月',value: 9 },
+    { name: '11月',value: 10 },
+    { name: '12月',value: 11 },
+]
