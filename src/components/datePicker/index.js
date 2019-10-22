@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-21 11:09:47
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-22 09:57:40
+ * @LastEditTime: 2019-10-22 17:43:35
  */
 import React, { Component } from 'react';
 
@@ -27,8 +27,13 @@ export default class DatePicker extends Component {
             next_month_array: [],
             choosed: '', // 当前点击的时间
             chooseType: 0, // 选择类型 2 年 1 月 0 天
+            year_arr: [],
 
-            year_arr: []
+            chooseDay: '', // 选择的具体时间
+
+            animation: false, // 动画
+            hidden: true // 初始隐藏日期列表
+
         }
     }
 
@@ -138,8 +143,15 @@ export default class DatePicker extends Component {
         let { yy, mm } = this.state;
         this.setState({
             days: this.state.days.map(c => v.dd === c.dd && c.class === v.class ? {...c, choose: true} : {...c, choose: false}),
-            choosed: Object.assign(v, {yy: yy, mm: mm})
+            choosed: Object.assign(v, {yy: yy, mm: mm}),
+            chooseDay: v.yy + '-' + v.mm + '-' + v.dd
         });
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            chooseDay: e.target.value
+        })
     }
 
     prefixInteger = (dd, n) => {
@@ -244,12 +256,31 @@ export default class DatePicker extends Component {
         }
     }
 
+    // 取消按钮
+    hanldeCancel = () => {
+        this.setState({
+            animation: false
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                    hidden: true
+                })
+            }, 700)
+        })
+    }
+
     render() {
-        const { yy, mm, chooseType } = this.state;
+        const { yy, mm, chooseType, animation, hidden } = this.state;
+        const { placeholder } = this.props;
         return (
             <div style={{ width: 220, position: 'relative' }}>
-                <input type='text' className='sm-datePicker-input sm-input'/>
-                <div className='sm-datePicker-list'>
+                <input type='text' className='sm-datePicker-input sm-input'
+                    value={this.state.chooseDay} onChange={this.handleChange}
+                    placeholder={placeholder}
+                    onClick={() => {this.setState({animation: true, hidden: false})}}/>
+                <i className='iconfont icon-riqi'></i>
+                <div className={['sm-datePicker-list', animation ? 'aniMoveUpIn' : 'aniMoveUpPut'].join(' ')}
+                    style={ hidden ? { display: 'none' } : null}>
                     <div className='sm-datePicker-header'>
                         <i className='iconfont icon-double-arrow-left' onClick={this.handlePreYear}></i>
                         {
@@ -270,6 +301,11 @@ export default class DatePicker extends Component {
                         {
                             this.handleYYorMMorDay()
                         }
+                    </div>
+                    <div className='sm-datePicker-footer'>
+                        <button style={{ marginRight: 5, background: 'white', color: '#515a6e' }}
+                            onClick={this.hanldeCancel}>取消</button>
+                        <button onClick={this.hanldeCancel}>确定</button>
                     </div>
                 </div>
             </div>
@@ -292,3 +328,11 @@ const month_list = [
     { name: '11月',value: 10 },
     { name: '12月',value: 11 },
 ]
+
+DatePicker.defaultProps = {
+    placeholder: '请选择'
+}
+
+DatePicker.propTypes = {
+    placeholder: PropTypes.string,
+}

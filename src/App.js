@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-21 13:33:19
+ * @LastEditTime: 2019-10-22 17:44:07
  */
 import React from 'react';
 
@@ -91,6 +91,7 @@ export default class App extends React.Component {
         return (
             <div style={{ margin: '30px', padding: 20}}>
                 <div style={{ margin: '30px' }}>
+                    <SmDatePicker></SmDatePicker>
                     <SmButton type='warning' disabled>danger</SmButton>
                     <SmSelect style={{ width: 200 }}
                         onChange={this.hangleSelectChange}
@@ -187,7 +188,6 @@ export default class App extends React.Component {
                     <p>对话框内容</p>
                     <p>对话框内容</p>
                 </SmModal>
-                <SmDatePicker></SmDatePicker>
             </div>
         )
     }
