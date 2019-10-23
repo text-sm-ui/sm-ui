@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-23 18:23:13
+ * @LastEditTime: 2019-10-23 22:58:18
  */
 import React from 'react';
 
@@ -99,7 +99,9 @@ export default class App extends React.Component {
         return (
             <div style={{ margin: '30px', padding: 20}}>
                 <div style={{ margin: '30px' }}>
-                    <SmTooltip></SmTooltip>
+                <SmTooltip content='这里据说时这里时tooltip, 这里据说时这里时tooltip'>
+                    <SmButton>这里时tooltip0000</SmButton>
+                </SmTooltip>
                     <SmDatePicker></SmDatePicker>
                     <br></br>
 
@@ -203,6 +205,9 @@ export default class App extends React.Component {
                     <p>对话框内容</p>
                     <p>对话框内容</p>
                 </SmModal>
+                <SmTooltip content='这里据说时这里时tooltip, 这里据说时这里时tooltip'>
+                    <SmButton>这里时tooltip0000</SmButton>
+                </SmTooltip>
             </div>
         )
     }
