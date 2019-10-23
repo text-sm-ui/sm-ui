@@ -3,12 +3,12 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-23 14:25:18
+ * @LastEditTime: 2019-10-23 18:23:13
  */
 import React from 'react';
 
 import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage, SmNotice,
-    SmModal, SmDatePicker, SmPage } from './components';
+    SmModal, SmDatePicker, SmPage, SmTooltip } from './components';
 
 const { Column } = SmTable
 
@@ -99,6 +99,7 @@ export default class App extends React.Component {
         return (
             <div style={{ margin: '30px', padding: 20}}>
                 <div style={{ margin: '30px' }}>
+                    <SmTooltip></SmTooltip>
                     <SmDatePicker></SmDatePicker>
                     <br></br>
 

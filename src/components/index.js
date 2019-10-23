@@ -1,7 +1,7 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 12:55:31
- * @LastEditTime: 2019-10-22 17:52:29
+ * @LastEditTime: 2019-10-23 18:22:52
  * @LastEditors: lvjing
  * @Description:
  */
@@ -26,3 +26,5 @@ export { default as SmModal } from './modal';
 export { default as SmDatePicker } from './datePicker';
 
 export { default as SmPage } from './page';
+
+export { default as SmTooltip } from './tooltip';
