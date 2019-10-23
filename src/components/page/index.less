@@ -1,5 +1,9 @@
 @import '../styles/index.less';
 .sm-page{
+    -webkit-user-select: none;
+    -moz-user-select:none;
+    -o-user-select:none;
+    -ms-user-select:none;
     display: flex;
     .sm-page-total{
         line-height: 28px;
@@ -35,6 +39,20 @@
                 color: @primary;
             }
         }
+        .sm-page-page-list-disabled{
+            cursor: not-allowed;
+            border: 1px solid #dcdee2;
+            i{
+                color: #dcdee2;
+            }
+        }
+        .sm-page-page-list-disabled:hover{
+            cursor: not-allowed;
+            border: 1px solid #dcdee2;
+            i{
+                color: #dcdee2;
+            }
+        }
         .sm-page-page-next-wapper{
             .sm-page-page-next{
                 display: inline-block;
@@ -50,7 +68,8 @@
                 color: #ccc;
                 text-align: center;
             }
-            .icon-double-arrow-left1{
+            .icon-double-arrow-left1,
+            .icon-double-arrow-left{
                 color: @primary;
                 cursor: pointer;
                 font-size: 12px;
@@ -61,6 +80,9 @@
         .sm-page-page-next-wapper:hover{
             .sm-page-page-next{
                 display: none;
+            }
+            .icon-double-arrow-left{
+                display: block;
             }
             .icon-double-arrow-left1{
                 display: block;

@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-22 17:53:06
+ * @LastEditTime: 2019-10-23 14:25:18
  */
 import React from 'react';
 
@@ -87,6 +87,14 @@ export default class App extends React.Component {
         })
     }
 
+    handleOnShowSizeChange = (page, pageSize) => {
+        console.log(page, pageSize)
+    }
+
+    handlePageOnChange = (page, pageSize) => {
+        console.log(page, pageSize)
+    }
+
     render() {
         return (
             <div style={{ margin: '30px', padding: 20}}>
@@ -94,7 +102,8 @@ export default class App extends React.Component {
                     <SmDatePicker></SmDatePicker>
                     <br></br>
 
-                    <SmPage></SmPage>
+                    <SmPage onShowSizeChange={this.handleOnShowSizeChange}
+                        onChange={this.handlePageOnChange}></SmPage>
 
                     <br></br>
                     <SmButton type='warning' disabled>danger</SmButton>
