@@ -3,11 +3,13 @@
  * @Author: lvjing
  * @Date: 2019-10-21 11:09:47
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-22 17:43:35
+ * @LastEditTime: 2019-10-24 10:04:11
  */
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
+
+import ReactDOM from 'react-dom';
 
 import './index.less';
 
@@ -32,7 +34,10 @@ export default class DatePicker extends Component {
             chooseDay: '', // 选择的具体时间
 
             animation: false, // 动画
-            hidden: true // 初始隐藏日期列表
+            hidden: true, // 初始隐藏日期列表,
+
+            direction: '',
+            top: 0
 
         }
     }
@@ -220,7 +225,7 @@ export default class DatePicker extends Component {
                                 return <span key={i} onClick={() => this.handleCurrent(v) }
                                     className={['sm-datePicker-detail',
                                     dd === v.dd && current_mm === mm  && current_yy === yy ? 'sm-datePicker-current' : null,
-                                    v.choose || (v.class === choosed.class && v.dd === choosed.dd && current_mm === mm) ? 'sm-datePicker-choosed' : null]. join(' ')}
+                                    v.choose || (v.class === choosed.class && v.dd === choosed.dd && current_mm === mm) ? 'sm-datePicker-choosed' : null].join(' ')}
                                     style={v.class === 1 ? {color: '#515a6e'}: null}>{ v.dd }</span>
                             })
                         }
@@ -267,6 +272,34 @@ export default class DatePicker extends Component {
                 })
             }, 700)
         })
+    }
+    handleSetDifference = () => {
+        let domHeigh = ReactDOM.findDOMNode(this.refs.wapper).clientHeight;
+
+        let winheight = window.innerHeight;
+
+        let top = ReactDOM.findDOMNode(this.refs.wapper).offsetParent.offsetTop;
+
+        let difference = winheight - top;
+
+        if ( difference > domHeigh ) {
+            this.setState({
+                direction: 'button',
+                top: domHeigh
+            })
+        } else {
+            this.setState({
+                direction: 'top',
+                top: domHeigh - 2
+            });
+        }
+    }
+
+    componentDidMount() {
+        // this.handleSetDifference();
+        // window.addEventListener("resize", () => {
+        //     this.handleSetDifference();
+        // });
     }
 
     render() {

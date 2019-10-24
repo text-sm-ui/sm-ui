@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-23 18:19:04
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-23 23:00:23
+ * @LastEditTime: 2019-10-24 10:07:22
  */
 
 import React, { Component } from 'react';
@@ -38,11 +38,11 @@ export default class Tooltip extends Component {
         })
     }
 
-    componentDidMount() {
+    handleSetDifference = () => {
         let wapper = ReactDOM.findDOMNode(this.refs.wapper).offsetWidth / 2;
         let sm = (ReactDOM.findDOMNode(this.refs.sm).offsetWidth) / 2;
-        
-        let domHeigh = ReactDOM.findDOMNode(this.refs.wapper).scrollHeight;
+
+        let domHeigh = ReactDOM.findDOMNode(this.refs.wapper).clientHeight;
 
         let winheight = window.innerHeight;
 
@@ -50,7 +50,7 @@ export default class Tooltip extends Component {
 
         let difference = winheight - top;
 
-        if ( difference > domHeigh) {
+        if ( difference > domHeigh ) {
             this.setState({
                 direction: 'button',
                 top: domHeigh
@@ -58,11 +58,18 @@ export default class Tooltip extends Component {
         } else {
             this.setState({
                 direction: 'top',
-                top: domHeigh
-            })
+                top: domHeigh - 2
+            });
         }
         this.setState({
             left:  sm - wapper
+        });
+    }
+
+    componentDidMount() {
+        this.handleSetDifference();
+        window.addEventListener("resize", () => {
+            this.handleSetDifference();
         });
     }
     render() {
@@ -74,12 +81,12 @@ export default class Tooltip extends Component {
                         this.props.children
                     }
                 </div>
-                <div className={['sm-tooltip-wapper', hover ? 'tooptilFadeIn' : 'tooptilFadeOut' ].join(' ')} 
+                <div className={['sm-tooltip-wapper', hover ? 'tooptilFadeIn' : 'tooptilFadeOut' ].join(' ')}
                     style={ !hidden ? { left: left, visibility: 'visible', top: direction === 'top' ? -top - 10 : null, marginTop: direction === 'top' ? 0 : null  } : null } ref='wapper'>
                     <div className='sm-tooltip-content'>
                         { this.props.content }
                     </div>
-                    <div className={['sm-tooltip-jiantou', direction === 'top' ? 'sm-jiantou-top' : null ].join(' ')} 
+                    <div className={['sm-tooltip-jiantou', direction === 'top' ? 'sm-jiantou-top' : null ].join(' ')}
                         style={ direction === 'top' ? { top: top} : null}>
                     </div>
                 </div>

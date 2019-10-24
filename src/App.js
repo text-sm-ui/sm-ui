@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-23 22:58:18
+ * @LastEditTime: 2019-10-24 09:30:17
  */
 import React from 'react';
 
@@ -152,6 +152,9 @@ export default class App extends React.Component {
                             <span style={{ marginLeft: 12 }}>默认选择</span>
                     </SmCheckbox>
                     <br/>
+                    <SmTooltip content='这里据说时这里时tooltip, 这里据说时这里时tooltip'>
+                        <SmButton>这里时tooltip0000</SmButton>
+                    </SmTooltip>
                     <div>
                         <SmRadio.Group
                             onChange={this.handleRadioChange}
@@ -205,9 +208,6 @@ export default class App extends React.Component {
                     <p>对话框内容</p>
                     <p>对话框内容</p>
                 </SmModal>
-                <SmTooltip content='这里据说时这里时tooltip, 这里据说时这里时tooltip'>
-                    <SmButton>这里时tooltip0000</SmButton>
-                </SmTooltip>
             </div>
         )
     }
