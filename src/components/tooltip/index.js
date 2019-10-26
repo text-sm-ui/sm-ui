@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-23 18:19:04
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-24 10:07:22
+ * @LastEditTime: 2019-10-26 11:29:56
  */
 
 import React, { Component } from 'react';
@@ -18,7 +18,6 @@ export default class Tooltip extends Component {
     constructor(props){
         super(props)
         this.state = {
-            hidden: true,
             left: 0,
             top: 0,
             hover: false,
@@ -27,10 +26,11 @@ export default class Tooltip extends Component {
     }
 
     handleMouse = () => {
-        this.setState({
-            hover: true,
-            hidden: false
-        })
+        // this.setState({
+        //     hover: true,
+        //     hidden: true
+        // })
+        this.handleSetDifference(true)
     }
     onMouseOut = () => {
         this.setState({
@@ -38,42 +38,45 @@ export default class Tooltip extends Component {
         })
     }
 
-    handleSetDifference = () => {
+    handleSetDifference = (hover) => {
         let wapper = ReactDOM.findDOMNode(this.refs.wapper).offsetWidth / 2;
         let sm = (ReactDOM.findDOMNode(this.refs.sm).offsetWidth) / 2;
-
-        let domHeigh = ReactDOM.findDOMNode(this.refs.wapper).clientHeight;
-
-        let winheight = window.innerHeight;
-
-        let top = ReactDOM.findDOMNode(this.refs.wapper).offsetParent.offsetTop;
-
-        let difference = winheight - top;
-
-        if ( difference > domHeigh ) {
-            this.setState({
-                direction: 'button',
-                top: domHeigh
-            })
-        } else {
-            this.setState({
-                direction: 'top',
-                top: domHeigh - 2
-            });
-        }
         this.setState({
+            hover: hover,
             left:  sm - wapper
+        },() => {
+            let domHeigh = ReactDOM.findDOMNode(this.refs.wapper).clientHeight;
+
+            let winheight = window.innerHeight;
+
+            let top = ReactDOM.findDOMNode(this.refs.wapper).parentElement.offsetTop;
+
+            let difference = winheight - top;
+
+
+            if ( difference > domHeigh ) {
+                this.setState({
+                    direction: 'button',
+                    top: domHeigh
+                })
+            } else {
+                this.setState({
+                    direction: 'top',
+                    top: domHeigh - 2
+                });
+            }
         });
     }
 
     componentDidMount() {
-        this.handleSetDifference();
         window.addEventListener("resize", () => {
-            this.handleSetDifference();
+            if (this.state.hover) {
+                this.handleSetDifference(true);
+            }
         });
     }
     render() {
-        const { left, hover, hidden, direction, top } = this.state;
+        const { hover, direction, top } = this.state;
         return (
             <div className='sm-tooltip'>
                 <div ref='sm' onMouseOver={this.handleMouse} onMouseOut={this.onMouseOut} style={{ cursor:'pointer' }}>
@@ -81,8 +84,8 @@ export default class Tooltip extends Component {
                         this.props.children
                     }
                 </div>
-                <div className={['sm-tooltip-wapper', hover ? 'tooptilFadeIn' : 'tooptilFadeOut' ].join(' ')}
-                    style={ !hidden ? { left: left, visibility: 'visible', top: direction === 'top' ? -top - 10 : null, marginTop: direction === 'top' ? 0 : null  } : null } ref='wapper'>
+                <div className={['sm-tooltip-wapper', hover ? 'tooptilFadeIn' : null ].join(' ')}
+                    style={ hover ? { top: direction === 'top' ? -(top + 10) : null, marginTop: direction === 'top' ? 0 : null  } : null } ref='wapper'>
                     <div className='sm-tooltip-content'>
                         { this.props.content }
                     </div>

@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-21 11:09:47
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-24 10:04:11
+ * @LastEditTime: 2019-10-26 11:33:46
  */
 import React, { Component } from 'react';
 
@@ -278,7 +278,7 @@ export default class DatePicker extends Component {
 
         let winheight = window.innerHeight;
 
-        let top = ReactDOM.findDOMNode(this.refs.wapper).offsetParent.offsetTop;
+        let top = ReactDOM.findDOMNode(this.refs.wapper).parentElement.offsetTop;
 
         let difference = winheight - top;
 
@@ -295,11 +295,21 @@ export default class DatePicker extends Component {
         }
     }
 
-    componentDidMount() {
-        // this.handleSetDifference();
-        // window.addEventListener("resize", () => {
-        //     this.handleSetDifference();
-        // });
+    // componentDidMount() {
+    //     this.handleSetDifference();
+    //     window.addEventListener("resize", () => {
+    //         this.handleSetDifference();
+    //     });
+    // }
+
+    // 开始选择日期
+    handleChooseTime = () => {
+        this.setState({
+            animation: true, 
+            hidden: false
+        },() => {
+            
+        })
     }
 
     render() {
@@ -310,7 +320,7 @@ export default class DatePicker extends Component {
                 <input type='text' className='sm-datePicker-input sm-input'
                     value={this.state.chooseDay} onChange={this.handleChange}
                     placeholder={placeholder}
-                    onClick={() => {this.setState({animation: true, hidden: false})}}/>
+                    onClick={this.handleChooseTime}/>
                 <i className='iconfont icon-riqi'></i>
                 <div className={['sm-datePicker-list', animation ? 'aniMoveUpIn' : 'aniMoveUpPut'].join(' ')}
                     style={ hidden ? { display: 'none' } : null}>

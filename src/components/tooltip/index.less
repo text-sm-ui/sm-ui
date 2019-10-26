@@ -5,7 +5,7 @@
     position: relative;
     .sm-tooltip-wapper{
         position: absolute;
-        visibility: hidden;
+        display: none;
         z-index: 100;
         margin-top: 8px;
         .sm-tooltip-content{
@@ -40,6 +40,7 @@
 
 .tooptilFadeIn{
     animation: tooptilFadeIn 0.7s forwards;
+    display: block !important;
 }
 
 @keyframes tooptilFadeIn {
