@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-22 17:47:24
+ * @LastEditTime: 2019-11-02 13:25:39
  */
 
 import React, { Component } from 'react';
@@ -164,5 +164,9 @@ Select.defaultProps = {
     placeholder: '请选择',
     showSearch: false,
     options: [],
-    allowClear: false
+    allowClear: false,
+    onChange: () => {},
+    onClearChange: () => {},
+    defaultValue: '',
+    style: {}
 }

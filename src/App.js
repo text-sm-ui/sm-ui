@@ -3,12 +3,12 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-10-26 11:17:59
+ * @LastEditTime: 2019-11-02 23:07:09
  */
 import React from 'react';
 
 import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage, SmNotice,
-    SmModal, SmDatePicker, SmPage, SmTooltip } from './components';
+    SmModal, SmDatePicker, SmPage, SmTooltip, SmDrawer, SmCascader } from './components';
 
 const { Column } = SmTable
 
@@ -39,7 +39,8 @@ export default class App extends React.Component {
                   checked: true
                 },
             ],
-            visibility: false
+            visibility: false,
+            visible2: false
         }
     }
     hangleClick = () => {
@@ -99,6 +100,13 @@ export default class App extends React.Component {
         return (
             <div style={{ margin: '30px', padding: 20}}>
                 <div style={{ margin: '30px' }}>
+                    <SmCascader style={{ width: 200 }} options={cascaderOptions}></SmCascader>
+                    <SmButton type='danger' onClick={() => this.setState({visible2: true})}>打开抽屉</SmButton>
+                <SmDrawer 
+                    visible={this.state.visible2}
+                    width={400}
+                    closable
+                    onClose={() => this.setState({visible2: false})}></SmDrawer>
                 <SmTooltip content='这里据说时这里时tooltip, 这里据说时这里时tooltip'>
                     <SmButton>这里时tooltip0000</SmButton>
                 </SmTooltip>
@@ -113,7 +121,7 @@ export default class App extends React.Component {
                     <SmSelect style={{ width: 200 }}
                         onChange={this.hangleSelectChange}
                         options={this.state.options}
-                        defaultValue={4}
+                        // defaultValue={4}
                         showSearch
                         allowClear
                         >
@@ -213,4 +221,58 @@ export default class App extends React.Component {
     }
 }
 
+const cascaderOptions = [
+    {
+      value: 'zhejiang',
+      label: '浙江',
+      children: [
+        {
+          value: 'hangzhou',
+          label: '杭州',
+          children: [
+            {
+              value: 'xihu',
+              label: '西湖',
+            },
+            {
+                value: 'shizilin',
+                label: '狮子林',
+                children: [
+                    {
+                        value: 'xiaoshizi',
+                        label: '小狮子',
+                      },
+                ]
+              },
+          ],
+        },
+      ],
+    },
+    {
+      value: 'jiangsu',
+      label: '江苏',
+      children: [
+        {
+          value: 'nanjing',
+          label: '南京',
+          children: [
+            {
+              value: 'zhonghuamen',
+              label: '中华门',
+            },
+          ],
+        },
+        {
+            value: 'wuxi',
+            label: '无锡',
+            children: [
+              {
+                value: 'zhonghuamen',
+                label: '常山区',
+              },
+            ],
+          },
+      ],
+    },
+  ];
 
