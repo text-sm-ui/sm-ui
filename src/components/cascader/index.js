@@ -2,7 +2,7 @@
  * @Description:  联机选择
  * @Author: lvjing
  * @Date: 2019-11-02 13:21:28
- * @LastEditTime: 2019-11-02 23:17:50
+ * @LastEditTime: 2019-11-03 14:20:05
  * @LastEditors: lvjing
  */
 
@@ -37,13 +37,15 @@ export default class Cascader extends Component{
     static Prototype = {
         style: PropTypes.object,
         placeholder: PropTypes.string,
-        options: PropTypes.array
+        options: PropTypes.array,
+        defaultValue: PropTypes.array
     }
     
     static defaultProps = {
         style: {},
         placeholder: '请选择',
-        options: () => []
+        options: [],
+        defaultValue: ['zhejiang', 'hangzhou', 'xihu']
     }
 
     // 无数据
@@ -57,11 +59,31 @@ export default class Cascader extends Component{
     }
 
     componentDidMount() {
+        console.log('应该只执行一次吧')
+        if (this.props.defaultValue.length) {
+            this.handleTree(this.props.options, this.props.defaultValue, 0, () => {
+                let str = ''
+                this.state.checked.forEach((v) => {
+                    str+=v.label + ' / '
+                });
+                this.setState({
+                    value: str.slice(0, str.length - 2)
+                });
+            });
+        } 
         window.addEventListener('click', () => {
             if (!this.state.value) {
                 this.setState({
                     showList: false,
-                    checked: []
+                    checked: [],
+                    options: [
+                        this.props.options.map(v => {
+                            return {
+                                ...v, 
+                                key: 1
+                            }
+                        })
+                    ]
                 });
             } else {
                 this.setState({
@@ -77,6 +99,10 @@ export default class Cascader extends Component{
     // 有数据
     haveData = () => {
         const { options, showList, checked } = this.state;
+        const { defaultValue } = this.props;
+        if (defaultValue.length) {
+            
+        }
         return (
             <div style={{ display: showList ? 'block' : 'none' }}>
                 <div className='sm-cascader-list aniShow'>
@@ -88,7 +114,8 @@ export default class Cascader extends Component{
                                         j.map((v, i) => {
                                             return (
                                                 <li key={i} onClick={(e) => this.handleCheck(e, v)}
-                                                className={['sm-cascader-menu-item', checked.length > k && v.value === checked[k].value ? 'sm-cascader-menu-item-checked' : null].join(' ')} 
+                                                className={['sm-cascader-menu-item', 
+                                                checked.length > k && v.value === checked[k].value  ? 'sm-cascader-menu-item-checked' : null].join(' ')} 
                                                 >
                                                     {v.label} {v.value}
                                                     {
@@ -126,7 +153,8 @@ export default class Cascader extends Component{
             this.setState({
                 checked: checkedArr,
                 backupChecked: checkedArr,
-                backupOption: this.state.options
+                backupOption: this.state.options.slice(0, v.key),
+                options: this.state.options.slice(0, v.key)
             }, () => {
                 let str = ''
                 this.state.checked.forEach((v) => {
@@ -144,6 +172,30 @@ export default class Cascader extends Component{
         e.stopPropagation();
         this.setState({
             value: e.target.value
+        })
+    }
+
+    handleTree = (data, defaultValue, count, callback) => {
+        data.forEach(v => {
+            if (v.value === defaultValue[count]) {
+                let c = this.state.checked.map(a => a);
+                let o = this.state.backupOption.map(a => a);
+                c.push({...v, key: count + 1});
+                o.push(data.map(j => j  ? {...j, key: count + 1} : null));
+                this.setState({
+                    checked: c,
+                    backupChecked: c,
+                    backupOption: this.state.backupOption.length === defaultValue.length ? this.state.backupOption : o
+                }, () => {
+                    this.setState({
+                        options: this.state.backupOption
+                    });
+                    if (v.children) {
+                        this.handleTree(v.children, defaultValue, count + 1, callback)
+                    }
+                    callback();
+                })
+            }
         })
     }
 
