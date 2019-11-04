@@ -2,7 +2,7 @@
  * @Description:  联机选择
  * @Author: lvjing
  * @Date: 2019-11-02 13:21:28
- * @LastEditTime: 2019-11-03 14:20:05
+ * @LastEditTime: 2019-11-04 09:19:31
  * @LastEditors: lvjing
  */
 
@@ -22,7 +22,7 @@ export default class Cascader extends Component{
             options: [
                 this.props.options.map(v => {
                     return {
-                        ...v, 
+                        ...v,
                         key: 1
                     }
                 })
@@ -40,7 +40,7 @@ export default class Cascader extends Component{
         options: PropTypes.array,
         defaultValue: PropTypes.array
     }
-    
+
     static defaultProps = {
         style: {},
         placeholder: '请选择',
@@ -59,7 +59,6 @@ export default class Cascader extends Component{
     }
 
     componentDidMount() {
-        console.log('应该只执行一次吧')
         if (this.props.defaultValue.length) {
             this.handleTree(this.props.options, this.props.defaultValue, 0, () => {
                 let str = ''
@@ -70,7 +69,7 @@ export default class Cascader extends Component{
                     value: str.slice(0, str.length - 2)
                 });
             });
-        } 
+        }
         window.addEventListener('click', () => {
             if (!this.state.value) {
                 this.setState({
@@ -79,7 +78,7 @@ export default class Cascader extends Component{
                     options: [
                         this.props.options.map(v => {
                             return {
-                                ...v, 
+                                ...v,
                                 key: 1
                             }
                         })
@@ -94,14 +93,14 @@ export default class Cascader extends Component{
             }
         });
     }
-    
+
 
     // 有数据
     haveData = () => {
         const { options, showList, checked } = this.state;
         const { defaultValue } = this.props;
         if (defaultValue.length) {
-            
+
         }
         return (
             <div style={{ display: showList ? 'block' : 'none' }}>
@@ -114,8 +113,8 @@ export default class Cascader extends Component{
                                         j.map((v, i) => {
                                             return (
                                                 <li key={i} onClick={(e) => this.handleCheck(e, v)}
-                                                className={['sm-cascader-menu-item', 
-                                                checked.length > k && v.value === checked[k].value  ? 'sm-cascader-menu-item-checked' : null].join(' ')} 
+                                                className={['sm-cascader-menu-item',
+                                                checked.length > k && v.value === checked[k].value  ? 'sm-cascader-menu-item-checked' : null].join(' ')}
                                                 >
                                                     {v.label} {v.value}
                                                     {

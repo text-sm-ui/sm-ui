@@ -3,14 +3,16 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-11-02 23:07:09
+ * @LastEditTime: 2019-11-04 18:01:53
  */
 import React from 'react';
 
-import { SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage, SmNotice,
-    SmModal, SmDatePicker, SmPage, SmTooltip, SmDrawer, SmCascader } from './components';
+import {
+    // SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage, SmNotice,
+    // SmModal, SmDatePicker, SmPage, SmTooltip, SmDrawer, SmCascader,
+    SmForm, SmInput, SmSelect, SmRadio, SmCheckbox, SmButton } from './components';
 
-const { Column } = SmTable
+// const { Column } = SmTable
 
 export default class App extends React.Component {
     constructor(props){
@@ -20,10 +22,9 @@ export default class App extends React.Component {
             defaultChecked: true,
             defaultSelect: '2',
             options: [
-                {label: '第一项', value: 1, disabled: true},
-                {label: '第二项', value: 2},
-                {label: '第三项', value: 3},
-                {label: '第四项', value: 4}
+                {label: '人妖', value: 1, disabled: true},
+                {label: '男', value: 2},
+                {label: '女', value: 3},
             ],
             dataSource: [
                 {
@@ -75,11 +76,11 @@ export default class App extends React.Component {
         console.log(val)
     }
     handleMessage = () => {
-        SmMessage.warning('成功了没');
+        // SmMessage.warning('成功了没');
         // SmMessage.success('成功了没')
     }
     handleNotice = () => {
-        SmNotice.success("这是notice")
+        // SmNotice.success("这是notice")
     }
 
     handleModal = () => {
@@ -96,13 +97,76 @@ export default class App extends React.Component {
         console.log(page, pageSize)
     }
 
+    handlevalidator  = () => {
+        this.refs.forms.validate(valid => {
+            console.log(valid)
+        })
+    }
+
+    handleReset = () => {
+        this.refs.forms.resetFields();
+    }
+
     render() {
         return (
             <div style={{ margin: '30px', padding: 20}}>
-                <div style={{ margin: '30px' }}>
+                <SmForm ref='forms'>
+                    <SmForm.Item
+                        label='姓名：'
+                        name='name'
+                        rules={
+                            [{ required: 'true', message: '请输入姓名'}]
+                        }>
+                        <SmInput></SmInput>
+                    </SmForm.Item>
+                    <SmForm.Item
+                        label='性别：'
+                        name='sex'
+                        rules={
+                            [{ required: 'true', message: '请选择性别'}]
+                        }>
+                        <SmSelect
+                            options={this.state.options}></SmSelect>
+                    </SmForm.Item>
+                    <SmForm.Item
+                        label='婚姻情况：'
+                        name='sigin'
+                        rules={
+                            [{ required: 'true', message: '请选择婚姻情况'}]
+                        }>
+                        <SmRadio.Group
+                        >
+                            <SmRadio value={1}><span style={{ padding: '0 10px' }}>已婚</span></SmRadio>
+                            <SmRadio value={'2'} style={{ margin: '0 20px' }}><span style={{ padding: '0 10px' }}>未婚</span></SmRadio>
+                            <SmRadio value={3} disabled><span style={{ padding: '0 10px' }}>单身狗</span></SmRadio>
+                        </SmRadio.Group>
+                    </SmForm.Item>
+                    <SmForm.Item
+                        label='爱好：'
+                        name='hobby'
+                        rules={
+                            [{ required: 'true', message: '请选择爱好情况'}]
+                        }>
+                        <SmCheckbox.Group>
+                            <SmCheckbox value={1}>
+                                <span style={{ marginLeft: 12 }}>苹果</span>
+                            </SmCheckbox>
+                            <SmCheckbox value={2} style={{margin: '0 20px'}}>
+                                <span style={{ marginLeft: 12 }}>橘子</span>
+                            </SmCheckbox>
+                            <SmCheckbox value={3}>
+                                <span style={{ marginLeft: 12 }}>樱桃</span>
+                            </SmCheckbox>
+                        </SmCheckbox.Group>
+                    </SmForm.Item>
+                    <SmButton type='primary' onClick={this.handlevalidator}>确定</SmButton>
+                    <SmButton onClick={this.handleReset}>重置</SmButton>
+                </SmForm>
+
+                {/* <div style={{ margin: '30px' }}>
                     <SmCascader style={{ width: 200 }} options={cascaderOptions}></SmCascader>
                     <SmButton type='danger' onClick={() => this.setState({visible2: true})}>打开抽屉</SmButton>
-                <SmDrawer 
+                <SmDrawer
                     visible={this.state.visible2}
                     width={400}
                     closable
@@ -121,7 +185,7 @@ export default class App extends React.Component {
                     <SmSelect style={{ width: 200 }}
                         onChange={this.hangleSelectChange}
                         options={this.state.options}
-                        // defaultValue={4}
+                        defaultValue={4}
                         showSearch
                         allowClear
                         >
@@ -204,9 +268,9 @@ export default class App extends React.Component {
                     title={
                         <span>可以自定义标题， render</span>
                     }
-                    // footer={
-                    //     <span>自定义footer</span>
-                    // }
+                    footer={
+                        <span>自定义footer</span>
+                    }
                     cancelText="cancel"
                     onText='ok'
                     handleCancel={() => this.setState({visibility: false})}
@@ -215,7 +279,7 @@ export default class App extends React.Component {
                     <p>对话框内容</p>
                     <p>对话框内容</p>
                     <p>对话框内容</p>
-                </SmModal>
+                </SmModal> */}
             </div>
         )
     }

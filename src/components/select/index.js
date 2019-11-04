@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-10-14 11:27:19
  * @LastEditors: lvjing
- * @LastEditTime: 2019-11-02 13:25:39
+ * @LastEditTime: 2019-11-04 17:29:21
  */
 
 import React, { Component } from 'react';
@@ -40,7 +40,7 @@ export default class Select extends Component {
                 })
             }, 700)
             try{
-                this.props.onChange(v)
+                this.props.onChange(v.value)
             }
             catch{
                 console.error("请绑定一个onChange事件")
@@ -129,17 +129,18 @@ export default class Select extends Component {
     }
 
     render() {
+        const { disabled, style, errors, placeholder, showSearch, allowClear } = this.props;
         return (
-            <div className={['sm-input-wrapper', this.props.disabled ? 'sm-select-disabled' : null].join(' ')} style={this.props.style}>
-                <input type='text' className={['sm-input', this.props.disabled ? 'sm-select-disabled' : null].join(' ')}
+            <div className={['sm-input-wrapper', disabled ? 'sm-select-disabled' : null].join(' ')} style={ style }>
+                <input type='text' className={['sm-input', disabled ? 'sm-select-disabled' : null, errors ? 'sm-input-danger' : null].join(' ')}
                     onClick={this.handleInputOnClick}
-                    placeholder={this.props.placeholder}
+                    placeholder={placeholder}
                     value={this.state.label}
-                    readOnly={!this.props.showSearch || this.props.disabled }
+                    readOnly={!showSearch || disabled }
                     onChange={this.handleInputOnChange}
                     />
                 {
-                    this.state.value && this.props.allowClear ? <i className='iconfont icon-danseshixintubiao-'></i> : <i className={['iconfont icon-arrow-left', this.state.showList ? 'rotating' : ''].join(' ')}></i>
+                    this.state.value && allowClear ? <i className='iconfont icon-danseshixintubiao-'></i> : <i className={['iconfont icon-arrow-left', this.state.showList ? 'rotating' : ''].join(' ')}></i>
                 }
                 {
                     this.state.showListData.length > 0 ? this.haveDataDom() : this.nodataDom()
@@ -165,8 +166,6 @@ Select.defaultProps = {
     showSearch: false,
     options: [],
     allowClear: false,
-    onChange: () => {},
-    onClearChange: () => {},
     defaultValue: '',
     style: {}
 }

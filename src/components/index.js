@@ -1,10 +1,12 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 12:55:31
- * @LastEditTime: 2019-11-02 13:23:18
+ * @LastEditTime: 2019-11-04 11:05:42
  * @LastEditors: lvjing
  * @Description:
  */
+
+
 export { default as SmButton } from './button';
 
 export { default as SmInput } from './input';
@@ -32,3 +34,6 @@ export { default as SmTooltip } from './tooltip';
 export { default as SmDrawer } from './drawer';
 
 export { default as SmCascader } from './cascader';
+
+export { default as SmForm } from './form';
+

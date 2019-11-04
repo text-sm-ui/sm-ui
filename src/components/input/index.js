@@ -1,7 +1,7 @@
 /*
  * @Author: lvjing
  * @Date: 2019-10-13 14:55:54
- * @LastEditTime: 2019-10-17 23:46:05
+ * @LastEditTime: 2019-11-04 17:31:37
  * @LastEditors: lvjing
  * @Description:
  */
@@ -21,19 +21,22 @@ export default class Input extends Component {
         }
     }
     render() {
+        const { errors, style, omit, type, disabled, maxlength, max,
+            min, readOnly, defaultValue, placeholder, allowClear
+        } = this.props;
         return (
-            <div className='sm-input-wrapper' style={this.props.style}>
-                <input className={['sm-input', this.props.omit ? 'sm-input-omit' : ''].join(' ')}
-                    type={this.props.type}
-                    disabled={this.props.disabled}
-                    maxLength={this.props.maxlength}
-                    max={this.props.max}
-                    min={this.props.min}
-                    readOnly={this.props.readOnly}
-                    value={this.props.defaultValue}
-                    placeholder={this.props.placeholder}
+            <div className='sm-input-wrapper' style={style}>
+                <input className={['sm-input', omit ? 'sm-input-omit' : '', errors ? 'sm-input-danger' : null].join(' ')}
+                    type={ type }
+                    disabled={ disabled }
+                    maxLength={ maxlength }
+                    max={ max }
+                    min={ min }
+                    readOnly={ readOnly }
+                    value={ defaultValue }
+                    placeholder={ placeholder }
                     onChange={this.props.onChange}/>
-                { this.props.allowClear && this.props.defaultValue ? <i className='iconfont icon-danseshixintubiao-' onClick={this.handleOnChange}></i> : null }
+                { allowClear && defaultValue ? <i className='iconfont icon-danseshixintubiao-' onClick={this.handleOnChange}></i> : null }
             </div>
         )
     }
@@ -45,7 +48,10 @@ Input.defaultProps = {
     placeholder: '请输入',
     allowClear: false,
     disabled: false,
-    readOnly: false
+    readOnly: false,
+    style: {},
+    maxlength: '',
+    errors: false
 }
 
 Input.propTypes = {
@@ -60,5 +66,6 @@ Input.propTypes = {
     onChange: PropTypes.func,
     maxlength: PropTypes.string,
     max: PropTypes.number,
-    min: PropTypes.number
+    min: PropTypes.number,
+    errors: PropTypes.bool
 }
