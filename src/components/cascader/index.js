@@ -2,7 +2,7 @@
  * @Description:  联机选择
  * @Author: lvjing
  * @Date: 2019-11-02 13:21:28
- * @LastEditTime: 2019-11-04 09:19:31
+ * @LastEditTime: 2019-11-04 21:44:27
  * @LastEditors: lvjing
  */
 
@@ -45,7 +45,7 @@ export default class Cascader extends Component{
         style: {},
         placeholder: '请选择',
         options: [],
-        defaultValue: ['zhejiang', 'hangzhou', 'xihu']
+        defaultValue: []
     }
 
     // 无数据
@@ -113,10 +113,10 @@ export default class Cascader extends Component{
                                         j.map((v, i) => {
                                             return (
                                                 <li key={i} onClick={(e) => this.handleCheck(e, v)}
-                                                className={['sm-cascader-menu-item',
-                                                checked.length > k && v.value === checked[k].value  ? 'sm-cascader-menu-item-checked' : null].join(' ')}
+                                                    className={['sm-cascader-menu-item',
+                                                    checked.length > k && v.value === checked[k].value  ? 'sm-cascader-menu-item-checked' : null].join(' ')}
                                                 >
-                                                    {v.label} {v.value}
+                                                    {v.label}
                                                     {
                                                         v.children ? <i className='iconfont icon-arrow-right1'></i> : null
                                                     }
@@ -162,6 +162,13 @@ export default class Cascader extends Component{
                 this.setState({
                     value: str.slice(0, str.length - 2),
                     showList: false
+                }, () => {
+                    try{
+                        this.props.onChange(this.state.checked.map(v => v.value))
+                    }
+                    catch{
+                        
+                    }
                 });
             });
         }
@@ -205,10 +212,10 @@ export default class Cascader extends Component{
 
     render() {
         const { showList, value } = this.state;
-        const { options } = this.props;
+        const { options, errors } = this.props;
         return (
             <div style={this.props.style} className='sm-cascader-wapper'>
-                <input type='text' className={['sm-input', this.props.disabled ? 'sm-select-disabled' : null].join(' ')}
+                <input type='text' className={['sm-input', this.props.disabled ? 'sm-select-disabled' : null, errors ? 'sm-input-danger' : null].join(' ')}
                     placeholder={this.props.placeholder}
                     onClick={(e) => this.handleShow(e)}
                     value={value}

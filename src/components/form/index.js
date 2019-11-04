@@ -3,7 +3,7 @@
  * @Author: lvjing
  * @Date: 2019-11-04 09:17:31
  * @LastEditors: lvjing
- * @LastEditTime: 2019-11-04 18:23:59
+ * @LastEditTime: 2019-11-04 21:09:50
  */
 
 import React, { Component } from 'react';
@@ -96,21 +96,29 @@ class Item extends Component {
     constructor(props){
         super(props);
         this.state = {
-            err: false
+            localErr: true
         }
     }
 
     handleInputChange = (e, name) => {
-        console.log(this.props.errors)
         let valueType = typeof(e)
         let value;
         if (isArray(e)) {
             value = e;
             this.setState({
-                err: true
+                localErr: value.length ? false : true
             })
         } else {
             value = valueType === 'object' ? e.target.value : e;
+            let localErr;
+            if (valueType === 'object') {
+                localErr = e.target.value ? false : true;
+            } else {
+                localErr = false;
+            }
+            this.setState({
+                localErr: localErr
+            })
         }
         this.setState({
             [name]: value
@@ -120,22 +128,23 @@ class Item extends Component {
     }
 
     render() {
+        const { localErr } = this.state;
         const { errors } = this.props;
         return (
             <div className='sm-form-wapper'>
                 <label className='sm-form-label'>
                     { this.props.rules.some(v => v.required) ? <i className='iconfont icon-must-fill2'></i> : null }
-                    {this.props.label}
+                    { this.props.label }
                 </label>
                 <div className='sm-form-item-content'>
                     {
                         React.cloneElement(this.props.children, {
                             onChange: (e) => this.handleInputChange(e, this.props.name),
-                            errors: errors ? true : false
+                            errors: errors && localErr ? true : false
                         })
                     }
                     {
-                        errors ? <span className='sm-form-item-message errFadeIn'>{ errors.message }</span> : null
+                        errors && localErr ? <span className='sm-form-item-message errFadeIn'>{ errors.message }</span> : null
                     }
                 </div>
                 {/* <span className='sm-form-item-suffix'>姓名解释</span> */}

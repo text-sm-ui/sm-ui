@@ -3,14 +3,14 @@
  * @Author: lvjing
  * @Date: 2019-10-13 09:04:11
  * @LastEditors: lvjing
- * @LastEditTime: 2019-11-04 18:01:53
+ * @LastEditTime: 2019-11-04 21:24:32
  */
 import React from 'react';
 
 import {
     // SmTable, SmButton, SmSelect, SmInput, SmCheckbox, SmRadio, SmMessage, SmNotice,
     // SmModal, SmDatePicker, SmPage, SmTooltip, SmDrawer, SmCascader,
-    SmForm, SmInput, SmSelect, SmRadio, SmCheckbox, SmButton } from './components';
+    SmForm, SmInput, SmSelect, SmRadio, SmCheckbox, SmButton, SmCascader } from './components';
 
 // const { Column } = SmTable
 
@@ -158,6 +158,14 @@ export default class App extends React.Component {
                                 <span style={{ marginLeft: 12 }}>樱桃</span>
                             </SmCheckbox>
                         </SmCheckbox.Group>
+                    </SmForm.Item>
+                    <SmForm.Item
+                        label='地区：'
+                        name='city'
+                        rules={
+                            [{ required: 'true', message: '请选择地区'}]
+                        }>
+                        <SmCascader options={cascaderOptions}></SmCascader>
                     </SmForm.Item>
                     <SmButton type='primary' onClick={this.handlevalidator}>确定</SmButton>
                     <SmButton onClick={this.handleReset}>重置</SmButton>
